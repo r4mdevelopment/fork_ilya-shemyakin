@@ -1,7 +1,7 @@
 #include <iostream>
 
-int main()
-{
+
+int main() {
 	std::cout << "kuznetsov.alexey\n";
 	return 0;
 }
