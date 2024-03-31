@@ -86,11 +86,6 @@ namespace mrkv
       in.putback('e');
       in.putback('k');
       in.putback(':');
-      input.erase(input.find(*input.rbegin()));
-      input.erase(input.find(*input.rbegin()));
-      input.erase(input.find(*input.rbegin()));
-      input.erase(input.find(*input.rbegin()));
-      input.erase(input.find(*input.rbegin()));
       dest.ref = std::stod(input);
     }
     else
