@@ -77,8 +77,8 @@ namespace mrkv
     std::string input = "";
     in >> input;
     if (input[1] == '.'
-      && (input[4] == 'e' || input[4] == 'E')
-      && (input[5] == '+' || input[5] == '-'))
+      && (input[3] == 'e' || input[3] == 'E')
+      && (input[4] == '+' || input[4] == '-'))
     {
       in.putback(*input.rbegin());
       in.putback('y');
