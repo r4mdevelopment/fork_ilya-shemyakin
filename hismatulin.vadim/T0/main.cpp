@@ -1,6 +1,7 @@
-#include<iostream>
-using namespace std;
-int main() {
-	cout << "hismatulin.vadim" << std::endl;
+#include <iostream>
+
+int main()
+{
+	std::cout << "hismatulin.vadim\n";
 	return 0;
 }
