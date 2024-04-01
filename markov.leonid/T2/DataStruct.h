@@ -3,6 +3,7 @@
 #include <iostream>
 #include <iomanip>
 #include <sstream>
+#include <cstring>
 #include "iofmtguard.h"
 
 namespace mrkv
@@ -50,6 +51,24 @@ namespace mrkv
     {
       return a.key3.length() < b.key3.length();
     }
+  }
+  std::string myScientific(double x)
+  {
+    std::stringstream ss;
+    ss << std::scientific << x;
+    std::string out = ss.str();
+    size_t i = std::min(out.find('E'), out.find('e'));
+    while (out[i - 1] == '0' && out[i - 2] != '.')
+    {
+      out.erase(i - 1, 1);
+      i = std::min(out.find('E'), out.find('e'));
+    }
+    while (out[i + 2] == '0')
+    {
+      out.erase(i + 2, 1);
+      i = std::min(out.find('E'), out.find('e'));
+    }
+    return out;
   }
 
   std::istream& operator>>(std::istream& in, DelimiterIO&& dest)
@@ -190,19 +209,14 @@ namespace mrkv
     return in;
   }
 
-  std::ostream& operator<<(std::ostream& out, const DataStruct& src)
-  {
+  std::ostream& operator<<(std::ostream& out, const DataStruct& src) {
     std::ostream::sentry sentry(out);
     if (!sentry)
     {
       return out;
     }
     iofmtguard fmtguard(out);
-    out << "(";
-    out << ":key1 " << std::setprecision(2) << std::scientific << src.key1;
-    out << ":key2 " << "'" << src.key2 << "'";
-    out << ":key3 " << "\"" << src.key3 << "\"" << ":";
-    out << ")";
+    out << "(:key1 " << myScientific(src.key1) << ":key2 '" << src.key2 << "':key3 \"" << src.key3 << "\":)";
     return out;
   }
 }
