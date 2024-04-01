@@ -2,6 +2,6 @@
 
 int main()
 {
-    std::cout << "hismatulin.vadim\n";
-    return 0;
+  std::cout << "hismatulin.vadim\n";
+  return 0;
 }
