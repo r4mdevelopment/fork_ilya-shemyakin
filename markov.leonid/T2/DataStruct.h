@@ -81,12 +81,23 @@ namespace mrkv
       || (input[1] == '.' && (input[3] == 'e' || input[3] == 'E')
         && (input[4] == '+' || input[4] == '-')))
     {
-      in.putback(*input.rbegin());
-      in.putback('y');
-      in.putback('e');
-      in.putback('k');
-      in.putback(':');
-      dest.ref = std::stod(input);
+      if (input[input.length() - 2] == ':')
+      {
+        in.putback(')');
+        in.putback(':');
+        input.erase(input.length() - 2, input.length());
+        dest.ref = std::stod(input);
+      }
+      else
+      {
+        in.putback(*input.rbegin());
+        in.putback('y');
+        in.putback('e');
+        in.putback('k');
+        in.putback(':');
+        input.erase(input.length() - 5, input.length());
+        dest.ref = std::stod(input);
+      }
     }
     else
     {
