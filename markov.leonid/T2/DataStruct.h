@@ -13,6 +13,7 @@ namespace mrkv
     char key2;
     std::string key3;
   };
+
   struct DelimiterIO
   {
     char exp;
