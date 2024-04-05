@@ -160,6 +160,7 @@ namespace mrkv
     precision_(s.precision()),
     fmt_(s.flags())
   {}
+
   iofmtguard::~iofmtguard()
   {
     s_.fill(fill_);
