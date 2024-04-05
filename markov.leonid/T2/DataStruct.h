@@ -13,6 +13,7 @@ namespace mrkv
     char key2;
     std::string key3;
   };
+
   struct DelimiterIO
   {
     char exp;
@@ -48,6 +49,7 @@ namespace mrkv
   std::istream& operator>>(std::istream& in, StringIO&& dest);
   std::istream& operator>>(std::istream& in, DataStruct& dest);
   std::ostream& operator<<(std::ostream& out, const DataStruct& dest);
+
   bool compareDataStruct(const DataStruct& a, const DataStruct& b);
   std::string myScientific(double x);
 }
