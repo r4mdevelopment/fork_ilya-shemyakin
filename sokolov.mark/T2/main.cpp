@@ -103,7 +103,7 @@ int main()
   using sokolov::comparator;
 
   std::vector<DataStruct> data;
-  // (:key1 a:key2 (:N -1:D 5:):key3 "Let madness release you":) //copy me!
+  // (:key1 d:key2 (:N -1:D 5:):key3 "Let madness release you":) //copy me!
   // (:key2 (:N -1:D 5:):key1 m:key3 "Let madness release you":)
 
   std::string input = "";
@@ -147,7 +147,7 @@ namespace sokolov
     return in;
   }
 
-  std::istream& sokolov::operator>>(std::istream& in, LabelCharIO&& dest)
+  std::istream& operator>>(std::istream& in, LabelCharIO&& dest)
   {
     std::istream::sentry sentry(in);
     if (!sentry)
@@ -157,7 +157,7 @@ namespace sokolov
     return in >> dest.ref;
   }
 
-  std::istream& sokolov::operator>>(std::istream& in, LongLongIO&& dest)
+  std::istream& operator>>(std::istream& in, LongLongIO&& dest)
   {
     std::istream::sentry sentry(in);
     if (!sentry)
@@ -167,7 +167,7 @@ namespace sokolov
     return in >> DelimiterIO{ 'N' } >> dest.ref;
   }
 
-  std::istream& sokolov::operator>>(std::istream& in, UnsLongLongIO&& dest)
+  std::istream& operator>>(std::istream& in, UnsLongLongIO&& dest)
   {
     std::istream::sentry sentry(in);
     if (!sentry)
@@ -187,7 +187,7 @@ namespace sokolov
     return std::getline(in >> DelimiterIO{ '"' }, dest.ref, '"');
   }
 
-  std::istream& sokolov::operator>>(std::istream& in, KeyStringIO&& dest)
+  std::istream& operator>>(std::istream& in, KeyStringIO&& dest)
   {
     std::istream::sentry sentry(in);
     if (!sentry)
@@ -197,7 +197,7 @@ namespace sokolov
     return std::getline(in >> DelimiterIO{ ':' }, dest.ref, ' ');
   }
 
-  std::istream& sokolov::operator>>(std::istream& in, LabelIO&& dest)
+  std::istream& operator>>(std::istream& in, LabelIO&& dest)
   {
     std::istream::sentry sentry(in);
     if (!sentry)
@@ -212,7 +212,7 @@ namespace sokolov
     return in;
   }
 
-  std::istream& sokolov::operator>>(std::istream& in, DataStruct& dest)
+  std::istream& operator>>(std::istream& in, DataStruct& dest)
   {
     std::istream::sentry sentry(in);
     if (!sentry)
