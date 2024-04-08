@@ -119,7 +119,6 @@ int main()
 
   std::sort(data.begin(), data.end(), comparator);
 
-  std::cout << "Data:\n";
   std::copy(
     std::begin(data),
     std::end(data),
