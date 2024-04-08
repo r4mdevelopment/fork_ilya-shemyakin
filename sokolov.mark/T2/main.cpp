@@ -225,7 +225,6 @@ namespace sokolov
 
       using sep = DelimiterIO;
       using chr = LabelCharIO;
-      using label = LabelIO;
       using ll = LongLongIO;
       using ull = UnsLongLongIO;
       using str = StringIO;
