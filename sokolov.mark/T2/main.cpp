@@ -111,6 +111,7 @@ int main()
   {
     std::istringstream iss(input);
     DataStruct temp;
+    temp.key1 = 'a';
     if (iss >> temp)
     {
       data.push_back(temp);
@@ -153,7 +154,7 @@ namespace sokolov
     {
       return in;
     }
-    std::string data = "";
+    std::string data = "  ";
     std::getline(in >> DelimiterIO{ '\'' }, data, '\'');
     if (data[1] != '\0')
     {
