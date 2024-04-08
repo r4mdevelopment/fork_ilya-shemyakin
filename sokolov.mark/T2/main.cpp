@@ -103,8 +103,8 @@ int main()
   using sokolov::comparator;
 
   std::vector<DataStruct> data;
-  // (:key1 d:key2 (:N -1:D 5:):key3 "Let madness release you":) //copy me!
-  // (:key2 (:N -1:D 5:):key1 m:key3 "Let madness release you":)
+  // (:key1 'd':key2 (:N -1:D 5:):key3 "Let madness release you":) //copy me!
+  // (:key2 (:N -1:D 5:):key1 'm':key3 "Let madness release you":)
 
   std::string input = "";
   while (std::getline(std::cin, input)) //stop this by ctrl+z
@@ -153,7 +153,17 @@ namespace sokolov
     {
       return in;
     }
-    return in >> dest.ref;
+    std::string data = "";
+    std::getline(in >> DelimiterIO{ '\'' }, data, '\'');
+    if (data[1] != '\0')
+    {
+      in.setstate(std::ios::failbit);
+    }
+    else
+    {
+      dest.ref = data[0];
+    }
+    return in;
   }
 
   std::istream& operator>>(std::istream& in, LongLongIO&& dest)
@@ -276,7 +286,7 @@ namespace sokolov
     }
     iofmtguard fmtguard(out);
     out << "(:";
-    out << "key1 " << src.key1;
+    out << "key1 '" << src.key1 << "'";
     out << ":key2 (:N " << std::fixed << std::setprecision(1) << src.key2.first;
     out << ":D " << std::fixed << std::setprecision(1) << src.key2.second << ":)";
     out << ":key3 \"" << src.key3 << "\"";
