@@ -103,19 +103,19 @@ int main()
   using sokolov::comparator;
 
   std::vector<DataStruct> data;
-  // (:key1 'd':key2 (:N -1:D 5:):key3 "Let madness release you":) //copy me!
-  // (:key2 (:N -1:D 5:):key1 'm':key3 "Let madness release you":)
-
-  std::string input = "";
-  while (std::getline(std::cin, input)) //stop this by ctrl+z
+  while (!std::cin.eof()) //stop this by ctrl+z
   {
-    std::istringstream iss(input);
-    DataStruct temp;
-    temp.key1 = 'a';
-    if (iss >> temp)
+    if (!std::cin)
     {
-      data.push_back(temp);
+      std::cin.clear();
+      std::cin.ignore(64, '\n');
     }
+
+    std::copy(
+      std::istream_iterator< DataStruct >(std::cin),
+      std::istream_iterator< DataStruct >(),
+      std::back_inserter(data)
+    );
   }
 
   std::sort(data.begin(), data.end(), comparator);
