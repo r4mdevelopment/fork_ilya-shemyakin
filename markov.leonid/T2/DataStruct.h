@@ -49,10 +49,6 @@ namespace mrkv
   std::istream& operator>>(std::istream& in, StringIO&& dest);
   std::istream& operator>>(std::istream& in, DataStruct& dest);
   std::ostream& operator<<(std::ostream& out, const DataStruct& dest);
-<<<<<<< HEAD
-
-=======
->>>>>>> master
   bool compareDataStruct(const DataStruct& a, const DataStruct& b);
   std::string myScientific(double x);
 }
