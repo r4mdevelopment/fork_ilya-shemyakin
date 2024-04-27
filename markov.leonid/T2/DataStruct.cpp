@@ -25,30 +25,54 @@ namespace mrkv
     {
       return in;
     }
-    std::string input = "";
-    in >> input;
-    if ((input[1] == '.' && (input[4] == 'e' || input[4] == 'E')
-      && (input[5] == '+' || input[5] == '-'))
-      || (input[1] == '.' && (input[3] == 'e' || input[3] == 'E')
-        && (input[4] == '+' || input[4] == '-')))
+    char firstP[100];
+    char c = '0', sign = '0';
+    int order = 0;
+
+    int i = 0, countOfDots = 0;
+    while (true)
     {
-      if (input[input.length() - 2] == ':')
+      in >> c;
+      if (in && (isdigit(c) || c == '.'))
       {
-        in.putback(')');
-        in.putback(':');
-        input.erase(input.length() - 2, input.length());
-        dest.ref = std::stod(input);
+        if (c == '.')
+        {
+          countOfDots++;
+        }
+        firstP[i++] = c;
       }
       else
       {
-        in.putback(*input.rbegin());
-        in.putback('y');
-        in.putback('e');
-        in.putback('k');
-        in.putback(':');
-        input.erase(input.length() - 5, input.length());
-        dest.ref = std::stod(input);
+        break;
       }
+    }
+    firstP[i] = '\0';
+    if (countOfDots > 1)
+    {
+      in.setstate(std::ios::failbit);
+    }
+
+    if (in && (c == 'e' || c == 'E'))
+    {
+      in >> sign;
+      if (in && (sign == '+' || sign == '-'))
+      {
+        in >> order;
+      }
+      else
+      {
+        in.setstate(std::ios::failbit);
+      }
+    }
+    else
+    {
+      in.setstate(std::ios::failbit);
+    }
+
+    double firstPart = std::atof(firstP);
+    if (in && order >= 0)
+    {
+      dest.ref = firstPart * pow(10, (sign == '-' ? -order : order));
     }
     else
     {
@@ -132,6 +156,10 @@ namespace mrkv
             in >> str{ input.key3 };
             flag3 = true;
           }
+          else
+          {
+            in.setstate(std::ios::failbit);
+          }
         }
       }
       in >> sep{ ':' } >> sep{ ')' };
@@ -160,7 +188,6 @@ namespace mrkv
     precision_(s.precision()),
     fmt_(s.flags())
   {}
-
   iofmtguard::~iofmtguard()
   {
     s_.fill(fill_);
@@ -194,6 +221,11 @@ namespace mrkv
     {
       out.erase(i - 1, 1);
       i = out.find('e');
+    }
+    if (out[i + 2] == '0' && out[i + 3] == '0')
+    {
+      out.erase(i + 2, 1);
+      return out;
     }
     while (out[i + 2] == '0')
     {

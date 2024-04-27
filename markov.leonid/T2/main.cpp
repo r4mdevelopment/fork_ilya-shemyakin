@@ -11,16 +11,18 @@ int main()
   using mrkv::compareDataStruct;
   std::vector<DataStruct> data;
 
-  std::string line = "";
-
-  while (std::getline(std::cin, line))
+  while (!std::cin.eof())
   {
-    std::istringstream iss(line);
-    DataStruct tmp;
-    if (iss >> tmp)
+    if (!std::cin)
     {
-      data.push_back(tmp);
+      std::cin.clear();
+      std::cin.ignore(std::numeric_limits<int>::max(), '\n');
     }
+    std::copy(
+      std::istream_iterator<DataStruct>(std::cin),
+      std::istream_iterator<DataStruct>(),
+      std::back_inserter(data)
+    );
   }
 
   std::sort(data.begin(), data.end(), compareDataStruct);
