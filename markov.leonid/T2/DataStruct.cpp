@@ -1,4 +1,5 @@
 #include "DataStruct.h"
+#include <cmath>
 
 namespace mrkv
 {
@@ -72,7 +73,7 @@ namespace mrkv
     double firstPart = std::atof(firstP);
     if (in && order >= 0)
     {
-      dest.ref = firstPart * std::pow(10, (sign == '-' ? -order : order));
+      dest.ref = firstPart * pow(10, (sign == '-' ? -order : order));
     }
     else
     {
