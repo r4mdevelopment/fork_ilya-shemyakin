@@ -16,7 +16,7 @@ int main()
     if (!std::cin)
     {
       std::cin.clear();
-      std::cin.ignore(std::numeric_limits<int>::max(), '\n');
+      std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     }
     std::copy(
       std::istream_iterator<DataStruct>(std::cin),

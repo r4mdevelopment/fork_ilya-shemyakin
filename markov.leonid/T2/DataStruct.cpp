@@ -10,9 +10,9 @@ namespace mrkv
     {
       return in;
     }
-    char c = '0';
-    in >> c;
-    if (in && (c != dest.exp))
+    char symbol = '0';
+    in >> symbol;
+    if (in && (symbol != dest.exp))
     {
       in.setstate(std::ios::failbit);
     }
@@ -26,34 +26,34 @@ namespace mrkv
     {
       return in;
     }
-    char firstP[100];
-    char c = '0', sign = '0';
+    char inputFirstPart[100];
+    char symbol = '0', sign = '0';
     int order = 0;
 
-    int i = 0, countOfDots = 0;
+    int i = 0, dotsCount = 0;
     while (true)
     {
-      in >> c;
-      if (in && (isdigit(c) || c == '.'))
+      in >> symbol;
+      if (in && (isdigit(symbol) || symbol == '.'))
       {
-        if (c == '.')
+        if (symbol == '.')
         {
-          countOfDots++;
+          dotsCount++;
         }
-        firstP[i++] = c;
+        inputFirstPart[i++] = symbol;
       }
       else
       {
         break;
       }
     }
-    firstP[i] = '\0';
-    if (countOfDots > 1)
+    inputFirstPart[i] = '\0';
+    if (dotsCount > 1)
     {
       in.setstate(std::ios::failbit);
     }
 
-    if (in && (c == 'e' || c == 'E'))
+    if (in && (symbol == 'e' || symbol == 'E'))
     {
       in >> sign;
       if (in && (sign == '+' || sign == '-'))
@@ -70,7 +70,7 @@ namespace mrkv
       in.setstate(std::ios::failbit);
     }
 
-    double firstPart = std::atof(firstP);
+    double firstPart = std::atof(inputFirstPart);
     if (in && order >= 0)
     {
       dest.ref = firstPart * pow(10, (sign == '-' ? -order : order));
@@ -89,10 +89,10 @@ namespace mrkv
     {
       return in;
     }
-    char open_quote = '0';
-    char close_quote = '0';
-    in >> open_quote >> dest.ref >> close_quote;
-    if (open_quote != '\'' || close_quote != '\'' || !in)
+    char openQuote = '0';
+    char closeQuote = '0';
+    in >> openQuote >> dest.ref >> closeQuote;
+    if (openQuote != '\'' || closeQuote != '\'' || !in)
     {
       in.setstate(std::ios::failbit);
     }
@@ -133,14 +133,14 @@ namespace mrkv
           break;
         }
         std::string key = "";
-        char c = '0';
-        in >> c;
+        char symbol = '0';
+        in >> symbol;
         if (!in)
         {
           break;
         }
 
-        if (c == ':' && (in >> key))
+        if (symbol == ':' && (in >> key))
         {
           if (key == "key1")
           {
