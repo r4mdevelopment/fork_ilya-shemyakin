@@ -17,7 +17,6 @@ namespace DNLX
     }
     return in;
   }
-
   std::istream& operator>>(std::istream& in, ComplexDoubleIO&& dest)
   {
     std::istream::sentry sentry(in);
@@ -25,10 +24,8 @@ namespace DNLX
     {
       return in;
     }
-
     double real = 0.0;
     double imag = 0.0;
-
     in >> DelimiterIO{ '(' } >> real >> imag >> DelimiterIO{ ')' };
     if (in)
     {
@@ -36,8 +33,6 @@ namespace DNLX
     }
     return in;
   }
-
-
   std::istream& operator>>(std::istream& in, DoubleIO&& dest)
   {
     std::istream::sentry sentry(in);
@@ -47,7 +42,6 @@ namespace DNLX
     }
     return in >> dest.num;
   }
-
   std::istream& operator>>(std::istream& in, ULLOCTIO&& dest) {
     std::istream::sentry sentry(in);
     if (!sentry)
@@ -56,7 +50,6 @@ namespace DNLX
     }
     return in >> std::oct >> dest.ref;
   }
-
   std::istream& operator>>(std::istream& in, StringIO&& dest)
   {
     std::istream::sentry sentry(in);
@@ -66,7 +59,6 @@ namespace DNLX
     }
     return std::getline(in >> DelimiterIO{ '"' }, dest.ref, '"');
   }
-
   std::istream& operator>>(std::istream& in, DataStruct& dest)
   {
     std::istream::sentry sentry(in);
@@ -80,7 +72,6 @@ namespace DNLX
       using ULL = ULLOCTIO;
       using cmp = ComplexDoubleIO;
       using str = StringIO;
-
       in >> sep{ '(' };
       bool flag1 = false, flag2 = false, flag3 = false;
       while (true) {
@@ -89,7 +80,6 @@ namespace DNLX
         char c;
         in >> c;
         if (!in) break;
-
         if (c == ':' && (in >> key))
         {
           if (key == "key1")
@@ -117,11 +107,6 @@ namespace DNLX
     }
     return in;
   }
-  
-  
-
-
-
   std::ostream& operator<<(std::ostream& out, const DataStruct& src)
   {
     std::ostream::sentry sentry(out);
@@ -137,7 +122,6 @@ namespace DNLX
     out << ":)";
     return out;
   }
-
   bool compareDataStruct(const DataStruct& ds_first, const DataStruct& ds_second)
   {
     double Re_first = ds_first.key2.real(),
@@ -146,10 +130,8 @@ namespace DNLX
       Im_second = ds_second.key2.imag(),
       R_first = 0.0,
       R_second = 0.0;
-
     R_first = sqrt(pow(Re_first, 2) + pow(Im_first, 2));
     R_second = sqrt(pow(Re_second, 2) + pow(Im_second, 2));
-
     if (ds_first.key1 < ds_second.key1)
     {
       return true;
@@ -167,14 +149,12 @@ namespace DNLX
     }
     return false;
   }
-
   iofmtguard::iofmtguard(std::basic_ios< char >& s) :
     s_(s),
     fill_(s.fill()),
     precision_(s.precision()),
     fmt_(s.flags())
   {}
-
   iofmtguard::~iofmtguard()
   {
     s_.fill(fill_);
