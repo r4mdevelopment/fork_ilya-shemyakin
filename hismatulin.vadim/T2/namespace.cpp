@@ -17,7 +17,6 @@ namespace hismatulin
     }
     return in;
   }
-
   std::istream& operator>>(std::istream& in, CMPDouble_ST&& dest)
   {
     std::istream::sentry sentry(in);
@@ -25,7 +24,6 @@ namespace hismatulin
     {
       return in;
     }
-
     double real = 0.0;
     double imag = 0.0;
 
@@ -36,8 +34,6 @@ namespace hismatulin
     }
     return in;
   }
-
-
   std::istream& operator>>(std::istream& in, Double_ST&& dest)
   {
     std::istream::sentry sentry(in);
@@ -47,7 +43,6 @@ namespace hismatulin
     }
     return in >> dest.num;
   }
-
   std::istream& operator>>(std::istream& in, ULL_ST&& dest) {
     std::istream::sentry sentry(in);
     if (!sentry)
@@ -61,7 +56,6 @@ namespace hismatulin
     }
     return in;
   }
-
   std::istream& operator>>(std::istream& in, String_ST&& dest)
   {
     std::istream::sentry sentry(in);
@@ -71,7 +65,6 @@ namespace hismatulin
     }
     return std::getline(in >> DelimiterIO{ '"' }, dest.ref, '"');
   }
-
   std::istream& operator>>(std::istream& in, DataStruct& dest)
   {
     std::istream::sentry sentry(in);
@@ -85,7 +78,6 @@ namespace hismatulin
       using ULL = ULL_ST;
       using cmp = CMPDouble_ST;
       using str = String_ST;
-
       in >> sep{ '(' };
       bool flag1 = false, flag2 = false, flag3 = false;
       while (true) {
@@ -122,7 +114,6 @@ namespace hismatulin
     }
     return in;
   }
-
   std::ostream& operator<<(std::ostream& out, const DataStruct& src)
   {
     std::ostream::sentry sentry(out);
@@ -138,7 +129,6 @@ namespace hismatulin
     out << ":)";
     return out;
   }
-
   bool compareDataStruct(const DataStruct& ds_first, const DataStruct& ds_second)
   {
     double Re_first = ds_first.key2.real(),
@@ -147,10 +137,8 @@ namespace hismatulin
       Im_second = ds_second.key2.imag(),
       R_first = 0.0,
       R_second = 0.0;
-
     R_first = sqrt(pow(Re_first, 2) + pow(Im_first, 2));
     R_second = sqrt(pow(Re_second, 2) + pow(Im_second, 2));
-
     if (ds_first.key1 < ds_second.key1)
     {
       return true;
@@ -174,7 +162,6 @@ namespace hismatulin
     precision_(s.precision()),
     fmt_(s.flags())
   {}
-
   iofmtguard::~iofmtguard()
   {
     s_.fill(fill_);
@@ -182,3 +169,5 @@ namespace hismatulin
     s_.flags(fmt_);
   }
 }
+
+
