@@ -1,4 +1,4 @@
-#include "DataStruct.h"
+#include "dataStruct.h"
 
 namespace pluzhnik
 {
