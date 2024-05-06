@@ -26,7 +26,6 @@ namespace hismatulin
     }
     double real = 0.0;
     double imag = 0.0;
-
     in >> DelimiterIO{ '(' } >> real >> imag >> DelimiterIO{ ')' };
     if (in)
     {
