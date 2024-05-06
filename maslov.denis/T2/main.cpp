@@ -19,10 +19,8 @@ int main()
       }
     }
 
-    
     std::sort(std::begin(data), std::end(data), DNLX::compareDataStruct);
 
-    
     std::copy(
       std::begin(data),
       std::end(data),
