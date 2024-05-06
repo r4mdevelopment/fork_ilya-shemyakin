@@ -79,13 +79,13 @@ namespace hismatulin
       using str = String_ST;
       in >> sep{ '(' };
       bool flag1 = false, flag2 = false, flag3 = false;
-      while (true) {
+      while (true)
+      {
         if (flag1 && flag2 && flag3) break;
         std::string key;
         char c;
         in >> c;
         if (!in) break;
-        
         if (c == ':' && (in >> key))
         {
           if (key == "key1")
