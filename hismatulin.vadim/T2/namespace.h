@@ -1,4 +1,3 @@
-#pragma once
 #ifndef NAMESPACE_H
 #define NAMESPACE_H
 
