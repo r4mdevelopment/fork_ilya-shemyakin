@@ -26,7 +26,7 @@ namespace hismatulin
     }
     double real = 0.0;
     double imag = 0.0;
-    in >> DelimiterIO{ '(' } >> real >> imag >> DelimiterIO{ ')' };
+    in >> DelimiterIO{'('} >> real >> imag >> DelimiterIO{')'};
     if (in)
     {
       dest.ref = std::complex<double>(real, imag);
@@ -62,7 +62,7 @@ namespace hismatulin
     {
       return in;
     }
-    return std::getline(in >> DelimiterIO{ '"' }, dest.ref, '"');
+    return std::getline(in >> DelimiterIO{'"'}, dest.ref, '"');
   }
   std::istream& operator>>(std::istream& in, DataStruct& dest)
   {
@@ -131,11 +131,11 @@ namespace hismatulin
   bool compareDataStruct(const DataStruct& ds_first, const DataStruct& ds_second)
   {
     double Re_first = ds_first.key2.real(),
-      Re_second = ds_second.key2.real(),
-      Im_first = ds_first.key2.imag(),
-      Im_second = ds_second.key2.imag(),
-      R_first = 0.0,
-      R_second = 0.0;
+    Re_second = ds_second.key2.real(),
+    Im_first = ds_first.key2.imag(),
+    Im_second = ds_second.key2.imag(),
+    R_first = 0.0,
+    R_second = 0.0;
     R_first = sqrt(pow(Re_first, 2) + pow(Im_first, 2));
     R_second = sqrt(pow(Re_second, 2) + pow(Im_second, 2));
     if (ds_first.key1 < ds_second.key1)
