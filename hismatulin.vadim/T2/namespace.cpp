@@ -168,7 +168,6 @@ namespace hismatulin
     }
     return false;
   }
-
   iofmtguard::iofmtguard(std::basic_ios< char >& s):
     s_(s),
     fill_(s.fill()),
