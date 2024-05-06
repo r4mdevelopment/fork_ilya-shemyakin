@@ -18,7 +18,7 @@ namespace hismatulin
     return in;
   }
 
-  std::istream& operator>>(std::istream& in, CMPDouble_ST&& dest) // комплексное число
+  std::istream& operator>>(std::istream& in, CMPDouble_ST&& dest)
   {
     std::istream::sentry sentry(in);
     if (!sentry)
@@ -26,8 +26,8 @@ namespace hismatulin
       return in;
     }
 
-    double real = 0.0; // вещественная часть
-    double imag = 0.0; // мнимая часть
+    double real = 0.0;
+    double imag = 0.0;
 
     in >> DelimiterIO{ '(' } >> real >> imag >> DelimiterIO{ ')' };
     if (in)
@@ -38,7 +38,7 @@ namespace hismatulin
   }
 
 
-  std::istream& operator>>(std::istream& in, Double_ST&& dest) // double число
+  std::istream& operator>>(std::istream& in, Double_ST&& dest)
   {
     std::istream::sentry sentry(in);
     if (!sentry)
@@ -48,7 +48,7 @@ namespace hismatulin
     return in >> dest.num;
   }
 
-  std::istream& operator>>(std::istream& in, ULL_ST&& dest) { // ULL число
+  std::istream& operator>>(std::istream& in, ULL_ST&& dest) {
     std::istream::sentry sentry(in);
     if (!sentry)
     {
@@ -62,7 +62,7 @@ namespace hismatulin
     return in;
   }
 
-  std::istream& operator>>(std::istream& in, String_ST&& dest) // строка (string) "...."
+  std::istream& operator>>(std::istream& in, String_ST&& dest)
   {
     std::istream::sentry sentry(in);
     if (!sentry)
@@ -72,7 +72,7 @@ namespace hismatulin
     return std::getline(in >> DelimiterIO{ '"' }, dest.ref, '"');
   }
 
-  std::istream& operator>>(std::istream& in, DataStruct& dest) // структура данных
+  std::istream& operator>>(std::istream& in, DataStruct& dest)
   {
     std::istream::sentry sentry(in);
     if (!sentry)
@@ -169,7 +169,7 @@ namespace hismatulin
     return false;
   }
 
-  iofmtguard::iofmtguard(std::basic_ios< char >& s) :
+  iofmtguard::iofmtguard(std::basic_ios< char >& s):
     s_(s),
     fill_(s.fill()),
     precision_(s.precision()),
