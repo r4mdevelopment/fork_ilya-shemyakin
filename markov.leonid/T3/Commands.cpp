@@ -116,7 +116,8 @@ namespace mrkv
 	std::vector<Polygon> tmp = figures;
 	bool flag = false;
 	int offset = -1, counter = 0;
-	auto lambda = [&forAdd, &tmp, &flag, &offset, &counter](Polygon& poly)
+	auto lambda = [&forAdd, &tmp, &flag, &offset, &counter]
+	( Polygon& poly )
 	{
 	  if (flag == true)
 	  {
@@ -148,8 +149,8 @@ namespace mrkv
 
   std::string inframe(std::vector<Polygon>& figures, Polygon& input)
   {
-	if ((getLeftB(input) >= getLeftFiguresB(figures) && getDownB(input) >= getDownFiguresB(figures)) &&
-	  (getRightB(input) <= getRightFiguresB(figures) && getUpB(input) <= getUpFiguresB(figures)))
+	if ((getLeftB(input) >= getLeftFiguresB(figures) && getDownB(input) >= getDownFiguresB(figures))
+	  && (getRightB(input) <= getRightFiguresB(figures) && getUpB(input) <= getUpFiguresB(figures)))
 	{
 	  return "<TRUE>";
 	}
