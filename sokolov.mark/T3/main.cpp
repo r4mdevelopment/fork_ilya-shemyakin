@@ -53,7 +53,6 @@ int main(int argc,char* argv[])
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	  }
 	}
-
 	return EXIT_SUCCESS;
   }
   catch (...)
