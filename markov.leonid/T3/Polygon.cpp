@@ -106,35 +106,6 @@ namespace mrkv
     return in;
   }
 
-  std::ostream& operator<<(std::ostream& out, const Point& point)
-  {
-    std::ostream::sentry sentry(out);
-    if (!sentry)
-    {
-      return out;
-    }
-    iofmtguard fmtguard(out);
-    out << "(" << point.x << ";" << point.y << ")";
-    return out;
-  }
-
-  std::ostream& operator<<(std::ostream& out, const Polygon& polygon)
-  {
-    std::ostream::sentry sentry(out);
-    if (!sentry)
-    {
-      return out;
-    }
-    iofmtguard fmtguard(out);
-    out << polygon.points.size() << " ";
-    std::copy(
-      std::begin(polygon.points),
-      std::end(polygon.points),
-      std::ostream_iterator<Point>(std::cout, " ")
-    );
-    return out;
-  }
-
   std::vector<Polygon> readPolygons(std::istream& in)
   {
     std::vector<Polygon> polygons;
@@ -214,55 +185,60 @@ namespace mrkv
     return (int(poly.points.size()) % div == rem) ? true : false;
   }
 
+  bool countConditionVertexes(const Polygon& poly, int numOfVertexes)
+  {
+    return (int(poly.points.size()) == numOfVertexes) ? true : false;
+  }
+
   int getLeftB(Polygon& poly)
   {
     return std::min_element(poly.points.begin(), poly.points.end(),
-      [](Point& cur, Point& smallest) {return cur.x < smallest.x; })->x;
+      [](Point& a, Point& b) { return a.x < b.x; })->x;
   }
 
   int getRightB(Polygon& poly)
   {
     return std::max_element(poly.points.begin(), poly.points.end(),
-      [](Point& cur, Point& biggest) {return cur.x < biggest.x; })->x;
+      [](Point& a, Point& b) { return a.x < b.x; })->x;
   }
 
   int getDownB(Polygon& poly)
   {
     return std::min_element(poly.points.begin(), poly.points.end(),
-      [](Point& cur, Point& smallest) {return cur.y < smallest.y; })->y;
+      [](Point& a, Point& b) { return a.y < b.y; })->y;
   }
 
   int getUpB(Polygon& poly)
   {
     return std::max_element(poly.points.begin(), poly.points.end(),
-      [](Point& cur, Point& biggest) {return cur.y < biggest.y; })->y;
+      [](Point& a, Point& b) { return a.y < b.y; })->y;
   }
 
   int getLeftFiguresB(std::vector<Polygon>& figures)
   {
     return getLeftB(*std::min_element(figures.begin(), figures.end(),
-      [](Polygon& cur, Polygon& smallestByX) {return getLeftB(cur) < getLeftB(smallestByX); })
+      [](Polygon& a, Polygon& b) { return getLeftB(a) < getLeftB(b); })
     );
   }
 
   int getRightFiguresB(std::vector<Polygon>& figures)
   {
     return getRightB(*std::max_element(figures.begin(), figures.end(),
-      [](Polygon& cur, Polygon& biggestByX) {return getRightB(cur) < getRightB(biggestByX); })
+      [](Polygon& a, Polygon& b) { return getRightB(a) < getRightB(b); })
     );
   }
 
   int getDownFiguresB(std::vector<Polygon>& figures)
   {
     return getDownB(*std::min_element(figures.begin(), figures.end(),
-      [](Polygon& cur, Polygon& smallestByY) {return getDownB(cur) < getDownB(smallestByY); })
+      [](Polygon& a, Polygon& b) { return getDownB(a) < getDownB(b); })
     );
   }
 
   int getUpFiguresB(std::vector<Polygon>& figures)
   {
     return getUpB(*std::max_element(figures.begin(), figures.end(),
-      [](Polygon& cur, Polygon& biggestByY) {return getUpB(cur) < getUpB(biggestByY); })
+      [](Polygon& a, Polygon& b) { return getUpB(a) < getUpB(b); })
     );
   }
 }

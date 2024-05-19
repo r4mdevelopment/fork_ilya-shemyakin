@@ -2,7 +2,6 @@
 #define POLYGON_H
 #include <iostream>
 #include <vector>
-#include "iofmtguard.h"
 
 namespace mrkv
 {
@@ -29,8 +28,6 @@ namespace mrkv
   std::istream& operator>>(std::istream& in, DelimiterIO&& dest);
   std::istream& operator>>(std::istream& in, Point& dest);
   std::istream& operator>>(std::istream& in, Polygon& polygon);
-  std::ostream& operator<<(std::ostream& out, const Point& point);
-  std::ostream& operator<<(std::ostream& out, const Polygon& polygon);
   std::vector<Polygon> readPolygons(std::istream& in);
 
   double calculateTriangleArea(const Point& p1, const Point& p2, const Point& p3);
@@ -41,6 +38,7 @@ namespace mrkv
   bool areaComporator(const Polygon& a, const Polygon& b);
   bool vertexesComporator(const Polygon& a, const Polygon& b);
   bool countCondition(const Polygon& poly, int div, int rem);
+  bool countConditionVertexes(const Polygon& poly, int numOfVertexes);
 
   int getLeftB(Polygon& poly);
   int getRightB(Polygon& poly);

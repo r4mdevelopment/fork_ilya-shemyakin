@@ -24,6 +24,7 @@ int main(int argc, char* argv[])
 
   std::vector<Polygon> figures;
   figures = readPolygons(fin);
+
   std::cout << std::setprecision(1) << std::fixed;
 
   try

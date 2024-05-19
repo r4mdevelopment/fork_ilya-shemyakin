@@ -72,7 +72,7 @@ namespace mrkv
     return (*std::min_element(figures.begin(), figures.end(), vertexesComporator)).points.size();
   }
 
-  int count(std::vector<Polygon>& figures, std::string& arg)
+  int count(std::vector<Polygon>& figures, const std::string& arg)
   {
     int num = isArgANumber(arg);
 
@@ -93,7 +93,7 @@ namespace mrkv
     }
     else if (num > 2)
     {
-      return std::count_if(figures.begin(), figures.end(), std::bind(countCondition, _1, num, 0));
+      return std::count_if(figures.begin(), figures.end(), std::bind(countConditionVertexes, _1, num));
     }
     else
     {
