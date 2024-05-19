@@ -28,18 +28,17 @@ namespace mrkv
 	  if (arg == "EVEN")
 	  {
 		return std::accumulate(figures.begin(), figures.end(), 0.0,
-					 std::bind(areaAccumulator, _1, _2, 2, 0));
+		  std::bind(areaAccumulator, _1, _2, 2, 0));
 	  }
 	  else if (arg == "ODD")
 	  {
 		return std::accumulate(figures.begin(), figures.end(), 0.0,
-					 std::bind(areaAccumulator, _1, _2, 2, 1));
+		  std::bind(areaAccumulator, _1, _2, 2, 1));
 	  }
 	  else if (arg == "MEAN" && figures.size() >= 1)
 	  {
-		return std::accumulate(figures.begin(), figures.end(), 0.0, 
-					 std::bind(areaAccumulator, _1, _2, 2, -1)) / figures.size();
-		
+		return std::accumulate(figures.begin(), figures.end(), 0.0,
+		  std::bind(areaAccumulator, _1, _2, 2, -1)) / figures.size();
 	  }
 	  else
 	  {
@@ -49,7 +48,7 @@ namespace mrkv
 	else if (num > 2)
 	{
 	  return std::accumulate(figures.begin(), figures.end(), 0.0,
-				  std::bind(areaAccumulator, _1, _2, num, 0));
+		std::bind(areaAccumulator, _1, _2, num, 0));
 	}
 	else
 	{
@@ -86,12 +85,12 @@ namespace mrkv
 	  if (arg == "EVEN")
 	  {
 		return std::count_if(figures.begin(), figures.end(),
-				  std::bind(countÑondition, _1, 2, 0));
+		  std::bind(countÑondition, _1, 2, 0));
 	  }
 	  else if (arg == "ODD")
 	  {
 		return std::count_if(figures.begin(), figures.end(),
-				  std::bind(countÑondition, _1, 2, 1));
+		  std::bind(countÑondition, _1, 2, 1));
 	  }
 	  else
 	  {
@@ -101,7 +100,7 @@ namespace mrkv
 	else if (num > 2)
 	{
 	  return std::count_if(figures.begin(), figures.end(),
-				std::bind(countÑondition, _1, num, 0));
+		std::bind(countÑondition, _1, num, 0));
 	}
 	else
 	{
@@ -116,7 +115,7 @@ namespace mrkv
 	{
 	  return 0;
 	}
-	
+
 	std::vector<Polygon> tmp = figures;
 	bool flag = false;
 	int offset = -1, counter = 0;
