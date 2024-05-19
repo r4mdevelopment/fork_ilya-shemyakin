@@ -84,13 +84,11 @@ namespace mrkv
 	{
 	  if (arg == "EVEN")
 	  {
-		return std::count_if(figures.begin(), figures.end(),
-		  std::bind(countÑondition, _1, 2, 0));
+		return std::count_if(figures.begin(), figures.end(), std::bind(countÑondition, _1, 2, 0));
 	  }
 	  else if (arg == "ODD")
 	  {
-		return std::count_if(figures.begin(), figures.end(),
-		  std::bind(countÑondition, _1, 2, 1));
+		return std::count_if(figures.begin(), figures.end(), std::bind(countÑondition, _1, 2, 1));
 	  }
 	  else
 	  {
@@ -99,8 +97,7 @@ namespace mrkv
 	}
 	else if (num > 2)
 	{
-	  return std::count_if(figures.begin(), figures.end(),
-		std::bind(countÑondition, _1, num, 0));
+	  return std::count_if(figures.begin(), figures.end(), std::bind(countÑondition, _1, num, 0));
 	}
 	else
 	{
@@ -120,22 +117,22 @@ namespace mrkv
 	bool flag = false;
 	int offset = -1, counter = 0;
 	auto lambda = [&forAdd, &tmp, &flag, &offset, &counter](Polygon& poly)
+	{
+	  if (flag == true)
 	  {
-		if (flag == true)
+		auto it = std::find(tmp.begin() + offset, tmp.end(), forAdd);
+		if (it != tmp.end())
 		{
-		  auto it = std::find(tmp.begin() + offset, tmp.end(), forAdd);
-		  if (it != tmp.end())
-		  {
-			tmp.insert(it, forAdd);
-		  }
-		  ++offset;
-		  ++counter;
-		  flag = false;
+		  tmp.insert(it, forAdd);
 		}
-		flag = (poly == forAdd) ? true : false;
 		++offset;
-		return false;
-	  };
+		++counter;
+		flag = false;
+	  }
+	  flag = (poly == forAdd) ? true : false;
+	  ++offset;
+	  return false;
+	};
 
 	std::copy_if(figures.begin(), figures.end(), tmp.begin(), lambda);
 
