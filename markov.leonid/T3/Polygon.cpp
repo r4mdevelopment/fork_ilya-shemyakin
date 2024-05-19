@@ -188,7 +188,7 @@ namespace mrkv
   double areaAccumulator(double acc, const Polygon& poly, int div, int rem)
   {
     double res = acc;
-    if (poly.points.size() % div == rem || rem == -1)
+    if (int(poly.points.size()) % div == rem || rem == -1)
     {
       res += calculatePolygonArea(poly);
     }
@@ -207,7 +207,7 @@ namespace mrkv
 
   bool countCondition(const Polygon& poly, int div, int rem)
   {
-    return (poly.points.size() % div == rem) ? true : false;
+    return (int(poly.points.size()) % div == rem) ? true : false;
   }
 
   int getLeftB(Polygon& poly)
