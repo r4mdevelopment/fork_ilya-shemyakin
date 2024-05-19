@@ -44,7 +44,7 @@ namespace mrkv
     }
     else if (num > 2)
     {
-      return std::accumulate(figures.begin(), figures.end(), 0.0, std::bind(areaAccumulator, _1, _2, num, 0));
+      return std::accumulate(figures.begin(), figures.end(), 0.0, std::bind(areaAccumulatorVertexes, _1, _2, num));
     }
     else
     {

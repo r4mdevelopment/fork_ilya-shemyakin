@@ -37,6 +37,7 @@ namespace mrkv
   double calculatePolygonArea(const Polygon& polygon);
 
   double areaAccumulator(double acc, const Polygon& poly, int div, int rem);
+  double areaAccumulatorVertexes(double acc, const Polygon& poly, int numOfVertexes);
   bool areaComporator(const Polygon& a, const Polygon& b);
   bool vertexesComporator(const Polygon& a, const Polygon& b);
   bool countCondition(const Polygon& poly, int div, int rem);

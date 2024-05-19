@@ -195,6 +195,16 @@ namespace mrkv
     return res;
   }
 
+  double areaAccumulatorVertexes(double acc, const Polygon& poly, int numOfVertexes)
+  {
+    double res = acc;
+    if (int(poly.points.size()) == numOfVertexes)
+    {
+      res += calculatePolygonArea(poly);
+    }
+    return res;
+  }
+
   bool areaComporator(const Polygon& a, const Polygon& b)
   {
     return calculatePolygonArea(a) < calculatePolygonArea(b);

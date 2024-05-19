@@ -41,7 +41,7 @@ int main(int argc, char* argv[])
           std::cin >> arg;
           std::cout << area(figures, arg) << std::endl;
         }
-        else if (cmd == "MAX")
+        else if (cmd == "MAX" && figures.size() >= 1)
         {
           std::string arg = "";
           std::cin >> arg;
@@ -58,7 +58,7 @@ int main(int argc, char* argv[])
             throw std::invalid_argument("<INVALID COMMAND>");
           }
         }
-        else if (cmd == "MIN")
+        else if (cmd == "MIN" && figures.size() >= 1)
         {
           std::string arg = "";
           std::cin >> arg;
