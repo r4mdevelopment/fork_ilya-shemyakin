@@ -213,52 +213,52 @@ namespace mrkv
   int getLeftB(Polygon& poly)
   {
     return std::min_element(poly.points.begin(), poly.points.end(),
-      [](Point& cur, Point& smallest) { return cur.x < smallest.x; })->x;
+      [](Point& cur, Point& smallest) {return cur.x < smallest.x;})->x;
   }
   
   int getRightB(Polygon& poly)
   {
     return std::max_element(poly.points.begin(), poly.points.end(),
-      [](Point& cur, Point& biggest) { return cur.x < biggest.x; })->x;
+      [](Point& cur, Point& biggest) {return cur.x < biggest.x;})->x;
   }
 
   int getDownB(Polygon& poly)
   {
     return std::min_element(poly.points.begin(), poly.points.end(),
-      [](Point& cur, Point& smallest) { return cur.y < smallest.y; })->y;
+      [](Point& cur, Point& smallest) {return cur.y < smallest.y;})->y;
   }
 
   int getUpB(Polygon& poly)
   {
     return std::max_element(poly.points.begin(), poly.points.end(),
-      [](Point& cur, Point& biggest) { return cur.y < biggest.y; })->y;
+      [](Point& cur, Point& biggest) {return cur.y < biggest.y;})->y;
   }
 
   int getLeftFiguresB(std::vector<Polygon>& figures)
   {
     return getLeftB(*std::min_element(figures.begin(), figures.end(),
-      [](Polygon& cur, Polygon& smallestByX) { return getLeftB(cur) < getLeftB(smallestByX); })
+      [](Polygon& cur, Polygon& smallestByX) {return getLeftB(cur) < getLeftB(smallestByX);})
     );
   }
 
   int getRightFiguresB(std::vector<Polygon>& figures)
   {
     return getRightB(*std::max_element(figures.begin(), figures.end(),
-      [](Polygon& cur, Polygon& biggestByX) { return getRightB(cur) < getRightB(biggestByX); })
+      [](Polygon& cur, Polygon& biggestByX) {return getRightB(cur) < getRightB(biggestByX);})
     );
   }
 
   int getDownFiguresB(std::vector<Polygon>& figures)
   {
     return getDownB(*std::min_element(figures.begin(), figures.end(),
-      [](Polygon& cur, Polygon& smallestByY) { return getDownB(cur) < getDownB(smallestByY); })
+      [](Polygon& cur, Polygon& smallestByY) {return getDownB(cur) < getDownB(smallestByY);})
     );
   }
 
   int getUpFiguresB(std::vector<Polygon>& figures)
   {
     return getUpB(*std::max_element(figures.begin(), figures.end(),
-      [](Polygon& cur, Polygon& biggestByY) { return getUpB(cur) < getUpB(biggestByY); })
+      [](Polygon& cur, Polygon& biggestByY) {return getUpB(cur) < getUpB(biggestByY);})
     );
   }
 }
