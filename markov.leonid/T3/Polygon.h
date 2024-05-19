@@ -10,7 +10,7 @@ namespace mrkv
   {
     int x, y;
 
-    Point(int x = 0, int y = 0): x(x), y(y) {}
+    Point(int x = 0, int y = 0) : x(x), y(y) {}
 
     bool operator==(const Point& other);
     bool operator!=(const Point& other);
