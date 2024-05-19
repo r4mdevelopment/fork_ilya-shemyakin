@@ -1,6 +1,7 @@
 #include <numeric>
 #include <algorithm>
 #include <cmath>
+#include <iterator>
 #include "Polygon.h"
 
 namespace mrkv
@@ -193,7 +194,7 @@ namespace mrkv
     }
     return res;
   }
-
+ 
   bool areaComporator(const Polygon& a, const Polygon& b)
   {
     return calculatePolygonArea(a) < calculatePolygonArea(b);
@@ -204,7 +205,7 @@ namespace mrkv
     return a.points.size() < b.points.size();
   }
 
-  bool countÑondition(const Polygon& poly, int div, int rem)
+  bool countCondition(const Polygon& poly, int div, int rem)
   {
     return (poly.points.size() % div == rem) ? true : false;
   }
@@ -214,7 +215,7 @@ namespace mrkv
     return std::min_element(poly.points.begin(), poly.points.end(),
       [](Point& cur, Point& smallest) { return cur.x < smallest.x; })->x;
   }
-
+  
   int getRightB(Polygon& poly)
   {
     return std::max_element(poly.points.begin(), poly.points.end(),

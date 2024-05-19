@@ -80,11 +80,11 @@ namespace mrkv
     {
       if (arg == "EVEN")
       {
-        return std::count_if(figures.begin(), figures.end(), std::bind(countÑondition, _1, 2, 0));
+        return std::count_if(figures.begin(), figures.end(), std::bind(countCondition, _1, 2, 0));
       }
       else if (arg == "ODD")
       {
-        return std::count_if(figures.begin(), figures.end(), std::bind(countÑondition, _1, 2, 1));
+        return std::count_if(figures.begin(), figures.end(), std::bind(countCondition, _1, 2, 1));
       }
       else
       {
@@ -93,7 +93,7 @@ namespace mrkv
     }
     else if (num > 2)
     {
-      return std::count_if(figures.begin(), figures.end(), std::bind(countÑondition, _1, num, 0));
+      return std::count_if(figures.begin(), figures.end(), std::bind(countCondition, _1, num, 0));
     }
     else
     {

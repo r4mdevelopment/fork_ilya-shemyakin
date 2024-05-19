@@ -39,7 +39,7 @@ namespace mrkv
   double areaAccumulator(double acc, const Polygon& poly, int div, int rem);
   bool areaComporator(const Polygon& a, const Polygon& b);
   bool vertexesComporator(const Polygon& a, const Polygon& b);
-  bool count—ondition(const Polygon& poly, int div, int rem);
+  bool countCondition(const Polygon& poly, int div, int rem);
 
   int getLeftB(Polygon& poly);
   int getRightB(Polygon& poly);
