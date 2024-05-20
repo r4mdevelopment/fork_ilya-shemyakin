@@ -84,10 +84,8 @@ namespace pluzhnik
     }
     else
     {
-      // Åñëè ðåãèñòð l â ñóôôèêñå ðàçíûé, ñòðîêà íå ïîäõîäèò
       in.setstate(std::ios_base::failbit);
     }
-
     return in;
   }
 
@@ -115,7 +113,7 @@ namespace pluzhnik
       using dbl = DBLIO;
       using str = StringIO;
 
-      //Ââîäèì ôëàãè äëÿ ïðîâåðêè êîððåêòíîñòè êàæäîãî îòäåëüíîãî êëþ÷à
+      //Ã‚Ã¢Ã®Ã¤Ã¨Ã¬ Ã´Ã«Ã Ã£Ã¨ Ã¤Ã«Ã¿ Ã¯Ã°Ã®Ã¢Ã¥Ã°ÃªÃ¨ ÃªÃ®Ã°Ã°Ã¥ÃªÃ²Ã­Ã®Ã±Ã²Ã¨ ÃªÃ Ã¦Ã¤Ã®Ã£Ã® Ã®Ã²Ã¤Ã¥Ã«Ã¼Ã­Ã®Ã£Ã® ÃªÃ«Ã¾Ã·Ã 
       in >> sep{ '(' };
       bool flag1 = false, flag2 = false, flag3 = false;
       while (true)
