@@ -124,6 +124,7 @@ namespace pluzhnik
         std::string key = "";
         char symbol = '0';
         in >> symbol;
+
         if (!in) break;
 
         if (symbol == ':' && (in >> key))
