@@ -18,22 +18,50 @@ namespace pluzhnik
     return in;
   }
 
-  std::istream& operator>>(std::istream& in, DoubleIO&& dest)
+  std::istream& operator>>(std::istream& in, DBLIO&& dest)
   {
     std::istream::sentry sentry(in);
     if (!sentry)
     {
       return in;
     }
-    char suffix = '0';
-    in >> dest.ref >> suffix;
-    if (suffix != 'd' && suffix != 'D') {
-      in.setstate(std::ios_base::failbit);
+    
+    char inputFirstPart[100];
+    char symbol = '0';
+    int dotsCounter = 0;
+    int i = 0;
+    while (true)
+    {
+      in >> symbol;
+      if (symbol == '.' || isdigit(symbol))
+      {
+        inputFirstPart[i] = symbol;
+        i++;
+        dotsCounter = (symbol == '.') ? ++dotsCounter : dotsCounter;
+      }
+      else
+      {
+        break;
+      }
     }
+
+    if (dotsCounter != 1)
+    {
+      in.setstate(std::ios_base::failbit);
+      return in;
+    }
+
+    if (symbol != 'D' && symbol != 'd')
+    {
+      in.setstate(std::ios_base::failbit);
+      return in;
+    }
+
+    dest.ref = std::atof(inputFirstPart);
     return in;
   }
 
-  std::istream& operator>>(std::istream& in, LongLongIO&& dest)
+  std::istream& operator>>(std::istream& in, SLLIO&& dest)
   {
     std::istream::sentry sentry(in);
     if (!sentry)
@@ -46,7 +74,7 @@ namespace pluzhnik
 
     if (!in) return in;
 
-    // If the first suffix is 'l', read the second suffix
+    
     if (suffix1 == 'l' || suffix1 == 'L')
     {
       in >> suffix2;
@@ -57,7 +85,7 @@ namespace pluzhnik
     }
     else
     {
-      // If the first suffix is not 'l' or 'L', set the error flag
+      // Если регистр l в суффиксе разный, строка не подходит
       in.setstate(std::ios_base::failbit);
     }
 
@@ -84,11 +112,11 @@ namespace pluzhnik
     DataStruct input;
     {
       using sep = DelimiterIO;
-      using sll = LongLongIO;
-      using dbl = DoubleIO;
+      using sll = SLLIO;
+      using dbl = DBLIO;
       using str = StringIO;
 
-      // using flags to identificate the keys in string
+      //Вводим флаги для проверки корректности каждого отдельного ключа
       in >> sep{ '(' };
       bool flag1 = false, flag2 = false, flag3 = false;
       while (true)
@@ -177,4 +205,3 @@ namespace pluzhnik
     s_.flags(fmt_);
   }
 }
-

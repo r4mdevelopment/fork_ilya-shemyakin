@@ -1,5 +1,5 @@
-#ifndef DATA_STRUCT_H
-#define DATA_STRUCT_H
+#ifndef DATASTRUCT_H 
+#define DATASTRUCT_H
 
 #include <iostream>
 #include <sstream>
@@ -15,7 +15,7 @@ namespace pluzhnik
   {
     double key1 = 0.0;
     long long key2 = 0;
-    std::string key3;
+    std::string key3 = "0";
   };
 
   struct DelimiterIO
@@ -23,12 +23,12 @@ namespace pluzhnik
     char exp;
   };
 
-  struct DoubleIO
+  struct DBLIO
   {
     double& ref;
   };
 
-  struct LongLongIO
+  struct SLLIO
   {
     long long& ref;
   };
@@ -51,8 +51,8 @@ namespace pluzhnik
   };
 
   std::istream& operator>>(std::istream& in, DelimiterIO&& dest);
-  std::istream& operator>>(std::istream& in, DoubleIO&& dest);
-  std::istream& operator>>(std::istream& in, LongLongIO&& dest);
+  std::istream& operator>>(std::istream& in, DBLIO&& dest);
+  std::istream& operator>>(std::istream& in, SLLIO&& dest);
   std::istream& operator>>(std::istream& in, StringIO&& dest);
   std::istream& operator>>(std::istream& in, DataStruct& dest);
   std::ostream& operator<<(std::ostream& out, const DataStruct& dest);
