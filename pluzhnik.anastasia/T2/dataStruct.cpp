@@ -73,7 +73,7 @@ namespace pluzhnik
     in >> dest.ref >> suffix1;
 
     if (!in) return in;
-    
+
     if (suffix1 == 'l' || suffix1 == 'L')
     {
       in >> suffix2;
