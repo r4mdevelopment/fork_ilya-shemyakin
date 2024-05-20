@@ -48,6 +48,8 @@ namespace pluzhnik
       }
     }
 
+    inputFirstPart[i] = '\0';
+
     if (dotsCounter != 1)
     {
       in.setstate(std::ios_base::failbit);
