@@ -26,7 +26,7 @@ namespace yakovlev
   {
     std::pair<long long, unsigned long long>& ref;
   };
- 
+
   struct StringIO
   {
     std::string& ref;
