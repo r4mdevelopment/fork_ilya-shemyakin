@@ -1,7 +1,7 @@
-#ifndef NAMESPACE_H 
-#define NAMESPACE_H 
+#ifndef NAMESPACE_H
+#define NAMESPACE_H
 
-#include "local.h" 
+#include "local.h"
 
 namespace yakovlev
 {
@@ -26,7 +26,7 @@ namespace yakovlev
   {
     std::pair<long long, unsigned long long>& ref;
   };
-  
+ 
   struct StringIO
   {
     std::string& ref;
