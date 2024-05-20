@@ -1,8 +1,5 @@
 #ifndef LOCAL_H
 #define LOCAL_H
-
-
-
 #include <iostream>
 #include <sstream>
 #include <string>
@@ -14,5 +11,4 @@
 #include <algorithm>
 #include <cmath>
 #include <exception>
-
 #endif

@@ -1,5 +1,4 @@
-#include "namespace.h"
-
+#include "structure.h"
 namespace DNLX
 {
   std::istream& operator>>(std::istream& in, DelimiterIO&& dest)
@@ -66,44 +65,42 @@ namespace DNLX
     {
       return in;
     }
-    DataStruct input;
+    using sep = DelimiterIO;
+    using ULL = ULLOCTIO;
+    using cmp = ComplexDoubleIO;
+    using str = StringIO;
+    in >> sep{ '(' };
+    bool flag1 = false, flag2 = false, flag3 = false;
+    while (true)
     {
-      using sep = DelimiterIO;
-      using ULL = ULLOCTIO;
-      using cmp = ComplexDoubleIO;
-      using str = StringIO;
-      in >> sep{ '(' };
-      bool flag1 = false, flag2 = false, flag3 = false;
-      while (true) {
-        if (flag1 && flag2 && flag3) break;
-        std::string key;
-        char c;
-        in >> c;
-        if (!in) break;
-        if (c == ':' && (in >> key))
+      if (flag1 && flag2 && flag3) break;
+      std::string key;
+      char c;
+      in >> c;
+      if (!in) break;
+      if (c == ':' && (in >> key))
+      {
+        if (key == "key1")
         {
-          if (key == "key1")
-          {
-            in >> ULL{ input.key1 };
-            flag1 = true;
-          }
-          else if (key == "key2")
-          {
-            in >> sep{ '#' } >> sep{ 'c' } >> cmp{ input.key2 };
-            flag2 = true;
-          }
-          else if (key == "key3")
-          {
-            in >> str{ input.key3 };
-            flag3 = true;
-          }
+          in >> ULL{ dest.key1 };
+          flag1 = true;
+        }
+        else if (key == "key2")
+        {
+          in >> sep{ '#' } >> sep{ 'c' } >> cmp{ dest.key2 };
+          flag2 = true;
+        }
+        else if (key == "key3")
+        {
+          in >> str{ dest.key3 };
+          flag3 = true;
         }
       }
-      in >> sep{ ':' } >> sep{ ')' };
     }
-    if (in)
+    in >> sep{ ':' } >> sep{ ')' };
+    if (!flag1 || !flag2 || !flag3)
     {
-      dest = input;
+      in.setstate(std::ios::failbit);
     }
     return in;
   }
@@ -162,4 +159,3 @@ namespace DNLX
     s_.flags(fmt_);
   }
 }
-
