@@ -1,4 +1,4 @@
-#include "namespace.h"
+#include "datastruct_hismatulin.h"
 
 using hismatulin::DataStruct;
 
@@ -8,23 +8,23 @@ int main()
   {
     std::string input = "";
     std::vector<DataStruct> data;
-
-    while (std::getline(std::cin, input))
+    while (!std::cin.eof())
     {
-      std::istringstream iss(input);
-      DataStruct temp;
-      if (iss >> temp)
+      std::copy(
+        std::istream_iterator<DataStruct>(std::cin),
+        std::istream_iterator<DataStruct>(),
+        std::back_inserter(data)
+      );
+      if (std::cin.fail() && !std::cin.eof())
       {
-        data.push_back(temp);
+        std::cin.clear();
       }
     }
-
     std::sort(std::begin(data), std::end(data), hismatulin::compareDataStruct);
-
     std::copy(
       std::begin(data),
       std::end(data),
-      std::ostream_iterator< DataStruct >(std::cout, "\n")
+      std::ostream_iterator<DataStruct>(std::cout, "\n")
     );
   }
   catch (std::exception& ex)
@@ -32,6 +32,5 @@ int main()
     std::cerr << ex.what();
     return EXIT_FAILURE;
   }
-
   return EXIT_SUCCESS;
 }
