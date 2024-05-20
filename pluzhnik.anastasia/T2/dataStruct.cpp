@@ -37,7 +37,10 @@ namespace pluzhnik
       {
         inputFirstPart[i] = symbol;
         i++;
-        dotsCounter = (symbol == '.') ? ++dotsCounter : dotsCounter;
+        if (symbol == '.')
+        {
+          ++dotsCounter;
+        }
       }
       else
       {
