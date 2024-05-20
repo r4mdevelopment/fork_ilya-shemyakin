@@ -28,7 +28,7 @@ namespace pluzhnik
     double& ref;
   };
 
-  struct SLLIO
+  struct LongLongIO
   {
     long long& ref;
   };
@@ -52,7 +52,7 @@ namespace pluzhnik
 
   std::istream& operator>>(std::istream& in, DelimiterIO&& dest);
   std::istream& operator>>(std::istream& in, DoubleIO&& dest);
-  std::istream& operator>>(std::istream& in, SLLIO&& dest);
+  std::istream& operator>>(std::istream& in, LongLongIO&& dest);
   std::istream& operator>>(std::istream& in, StringIO&& dest);
   std::istream& operator>>(std::istream& in, DataStruct& dest);
   std::ostream& operator<<(std::ostream& out, const DataStruct& dest);

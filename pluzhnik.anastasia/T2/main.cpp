@@ -17,11 +17,11 @@ int main()
       DataStruct temp;
       if (iss >> temp)
       {
-        data.push_back(temp); 
+        data.push_back(temp);
       }
     }
 
-    std::sort(std::begin(data), std::end(data), pluzhnik::compareDataStruct); 
+    std::sort(std::begin(data), std::end(data), pluzhnik::compareDataStruct);
 
     std::copy
     (

@@ -33,7 +33,7 @@ namespace pluzhnik
     return in;
   }
 
-  std::istream& operator>>(std::istream& in, SLLIO&& dest)
+  std::istream& operator>>(std::istream& in, LongLongIO&& dest)
   {
     std::istream::sentry sentry(in);
     if (!sentry)
@@ -84,7 +84,7 @@ namespace pluzhnik
     DataStruct input;
     {
       using sep = DelimiterIO;
-      using sll = SLLIO;
+      using sll = LongLongIO;
       using dbl = DoubleIO;
       using str = StringIO;
 
@@ -177,3 +177,4 @@ namespace pluzhnik
     s_.flags(fmt_);
   }
 }
+
