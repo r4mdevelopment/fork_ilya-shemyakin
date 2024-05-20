@@ -1,11 +1,4 @@
-<<<<<<< HEAD
 #include <iostream>
-
-int main()
-{
-  std::cout << "pluzhnik.anastasia\n";
-  return 0;
-=======
 ﻿#include "dataStruct.h"
 #include <algorithm>
 
@@ -24,11 +17,11 @@ int main()
       DataStruct temp;
       if (iss >> temp)
       {
-        data.push_back(temp); //<algorithm>
+        data.push_back(temp); 
       }
     }
 
-    std::sort(std::begin(data), std::end(data), pluzhnik::compareDataStruct); // <algorithm>
+    std::sort(std::begin(data), std::end(data), pluzhnik::compareDataStruct); 
 
     std::copy
     (
@@ -44,5 +37,4 @@ int main()
   }
 
   return EXIT_SUCCESS;
->>>>>>> master
 }
