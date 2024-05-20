@@ -25,7 +25,7 @@ namespace pluzhnik
     {
       return in;
     }
-    
+
     char inputFirstPart[100];
     char symbol = '0';
     int dotsCounter = 0;
@@ -73,7 +73,6 @@ namespace pluzhnik
     in >> dest.ref >> suffix1;
 
     if (!in) return in;
-
     
     if (suffix1 == 'l' || suffix1 == 'L')
     {

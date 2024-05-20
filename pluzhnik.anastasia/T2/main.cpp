@@ -5,8 +5,8 @@ using pluzhnik::DataStruct;
 
 int main()
 {
-    std::string input = ""; 
-    std::vector< DataStruct > data; 
+    std::string input = "";
+    std::vector< DataStruct > data;
 
     while (!std::cin.eof())
     {
@@ -22,13 +22,13 @@ int main()
       );
     }
 
-    std::sort(std::begin(data), std::end(data), pluzhnik::compareDataStruct); 
+    std::sort(std::begin(data), std::end(data), pluzhnik::compareDataStruct);
 
-    std::copy 
+    std::copy
     (
       std::begin(data),
       std::end(data),
-      std::ostream_iterator< DataStruct >(std::cout, "\n") 
+      std::ostream_iterator< DataStruct >(std::cout, "\n")
     );
 
   return EXIT_SUCCESS;
