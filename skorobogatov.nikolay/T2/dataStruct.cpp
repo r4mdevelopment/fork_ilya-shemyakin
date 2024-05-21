@@ -29,6 +29,7 @@ namespace skor
     std::string input = "";
     char currentSymbol = '0', plus = '0';
     int exponent = 0, numberOfDots = 0;
+    double firstPart = 0.0;
 
     while (true)
     {
@@ -69,7 +70,11 @@ namespace skor
       in.setstate(std::ios::failbit);
     }
 
-    double firstPart = std::stod(input);
+    if (input != "")
+    {
+      firstPart = std::stod(input);
+    }
+
     if (in && exponent >= 0)
     {
       dest.ref = firstPart * pow(10, (plus == '+' ? exponent : -exponent));
