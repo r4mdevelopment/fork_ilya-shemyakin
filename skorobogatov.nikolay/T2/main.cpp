@@ -1,4 +1,4 @@
-#include "Iterators.h"
+#include "dataStruct.h"
 #include <algorithm>
 
 using skor::DataStruct;
@@ -10,14 +10,18 @@ int main()
     std::string input = "";
     std::vector< DataStruct > data;
 
-    while (std::getline(std::cin, input))
+    while (!std::cin.eof())
     {
-      std::istringstream iss(input);
-      DataStruct temp;
-      if (iss >> temp)
+      if (!std::cin)
       {
-        data.push_back(temp);
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<int>::max(), '\n');
       }
+      std::copy(
+        std::istream_iterator<DataStruct>(std::cin),
+        std::istream_iterator<DataStruct>(),
+        std::back_inserter(data)
+      );
     }
 
     std::sort(std::begin(data), std::end(data), skor::compareDataStruct);
