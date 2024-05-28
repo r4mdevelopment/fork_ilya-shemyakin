@@ -66,7 +66,7 @@ int main()
 		std::getline(std::cin, word);
 
 		std::string translation = "";
-		std::cout << "¬ведите перевод: ";
+		std::cout << "Enter the translation: ";
 		std::getline(std::cin, translation);
 		if (!dictionary.add(word, translation))
 		{

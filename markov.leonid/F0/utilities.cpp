@@ -7,14 +7,14 @@ namespace mrkv
   void help(std::ostream& out)
   {
 	out << "Commands info: \n";
-	out << "INPUT <filename.txt> - Загрузить словарь.\n";
-	out << "OUTPUT <filename.txt> - Выгрузить словарь.\n";
-	out << "ADD <ENG_word> - Добавить слово в словарь.\n";
-	out << "DELETE <ENG_word> - Удалить слово из словаря.\n";
-	out << "FIND <ENG_word> - Найти слово.\n";
-	out << "PRINT - Вывести информацию о словаре.\n";
-	out << "STAT - Вывести количество слов в словаре.\n";
-	out << "HELP - Помощь.\n";
+	out << "INPUT <filename.txt> - Get the dictionary from file.\n";
+	out << "OUTPUT <filename.txt> - Put the dictionary into file.\n";
+	out << "ADD <ENG_word> - Add a word to the dictionary.\n";
+	out << "DELETE <ENG_word> - Delete a word from the dictionary.\n";
+	out << "FIND <ENG_word> - Find the word and print it.\n";
+	out << "PRINT - Print whole dictionary.\n";
+	out << "STAT - Get dictionary info.\n";
+	out << "HELP - For help.\n";
   }
   
   bool isCleanStr(std::string& str)

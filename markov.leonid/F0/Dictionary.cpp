@@ -10,6 +10,7 @@ bool Dictionary::add(std::string& key, std::string& translation)
   {
 	return false;
   }
+
   if (search(key))
   {
 	dic_.find(key)->second.insert(translation);
