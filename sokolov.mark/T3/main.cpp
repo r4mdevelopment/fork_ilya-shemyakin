@@ -1,64 +1,83 @@
-﻿#include <iostream>
-#include <fstream>
-#include <string>
-#include <vector>
-#include <iomanip>
-#include "Shape.h"
-#include "Commands.h"
+﻿#include "Commands.h"
 
-//ERRORS
-const std::string INV_COM = "INVALID COMMAND";
+const std::string I_C = "<INVALID COMMAND>";
+const std::string INCORRECT_USAGE = "Incorrect usage!";
+const std::string NO_SUCH_FILE = "File not found!";
+const std::string ERROR = "Something goes wrong";
 
-int main(int argc,char* argv[])
+using namespace sokolov;
+
+int main(int argC, char* argV[])
 {
-  if (argc != 2)
+  if (argC != 2)
   {
-    //error
+    std::cerr << INCORRECT_USAGE << std::endl;
     return EXIT_FAILURE;
   }
 
-  //std::vector<*shape*> shapes;
+  std::string fileName = argV[1];
 
-  std::string filename = argv[1];
-  std::ifstream fin(filename); //open file
+  std::ifstream file(fileName);
 
-  if (!fin.is_open())
+  if (!file)
   {
-    //error
+    std::cerr << NO_SUCH_FILE << std::endl;
     return EXIT_FAILURE;
   }
 
-  while (!fin.eof())
-  {
-    //считывание фигур
-    //запись в вектор
-  }
+  std::cout << std::setprecision(1) << std::fixed;
 
-  std::cout << std::fixed;
-  std::cout << std::setprecision(1);
+  std::vector<Polygon> data;
+
+  while (!file.eof())
+  {
+    std::copy(std::istream_iterator<Polygon>(file),
+      std::istream_iterator<Polygon>(),
+      std::back_inserter(data));
+    if (!file.eof() && file.fail())
+    {
+      file.clear();
+      file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    }
+  }
 
   try
   {
     while (!std::cin.eof())
     {
-      std::string command;
-      std::cin >> command;
+      std::string cmd;
+
+      std::cin >> cmd;
 
       try
       {
-        //executing commands
+        if (cmd == "AREA")
+          commands::getFullArea(data);
+        else if (cmd == "MIN")
+          commands::getMin(data);
+        else if (cmd == "MAX")
+          commands::getMax(data);
+        else if (cmd == "COUNT")
+          commands::countFigures(data);
+        else if (cmd == "RMECHO")
+          commands::lessarea(data);
+        else if (cmd == "INTERSECTIONS")
+          commands::intersections(data);
+        else if (cmd != "")
+          throw I_C;
       }
       catch (const std::string& err)
       {
-        std::cerr << err << std::endl;
+        std::cout << err << std::endl;
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
       }
     }
+
     return EXIT_SUCCESS;
   }
   catch (...)
   {
-    std::cerr << "ERROR!" << std::endl;
+    std::cerr << ERROR << std::endl;
     return EXIT_FAILURE;
   }
-}
+}//
