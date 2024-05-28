@@ -45,7 +45,7 @@ void Dictionary::print(std::ostream& out) const
   for (const auto& i : dic_)
   {
     out << i.first << " -";
-    int k = 0;
+    size_t k = 0;
     for (const auto& j : i.second)
     {
       if (i.second.size() - 1 == k)
@@ -68,7 +68,7 @@ bool Dictionary::printByKey(std::ostream& out, std::string& key) const
   if (search(key))
   {
     out << key << " -";
-    int k = 0;
+    size_t k = 0;
     for(const auto& i : dic_.find(key)->second)
     {
       if (dic_.find(key)->second.size() - 1 == k)
