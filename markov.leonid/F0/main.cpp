@@ -7,6 +7,7 @@
 
 int main()
 {
+  std::system("chcp 1251 > nul");
   setlocale(LC_ALL, "");
 
   Dictionary dictionary;
@@ -105,7 +106,7 @@ int main()
     {
       std::cout << e.what() << std::endl;
       std::cin.clear();
-      std::cin.ignore((std::numeric_limits<std::streamsize>::max)(), '\n');
+      std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     }
   }
   return 0;
