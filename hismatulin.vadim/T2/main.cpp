@@ -6,8 +6,8 @@ int main()
 {
   try
   {
-    std::string input = "";
     std::vector<DataStruct> data;
+
     while (!std::cin.eof())
     {
       std::copy(
@@ -32,5 +32,6 @@ int main()
     std::cerr << ex.what();
     return EXIT_FAILURE;
   }
+
   return EXIT_SUCCESS;
 }
