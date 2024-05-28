@@ -262,4 +262,4 @@ std::ostream& sokolov::operator << (std::ostream& out, const sokolov::Polygon& p
     out << point << " ";
   }
   return out;
-}//
+}

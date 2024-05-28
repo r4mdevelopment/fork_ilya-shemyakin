@@ -80,4 +80,4 @@ int main(int argC, char* argV[])
     std::cerr << ERROR << std::endl;
     return EXIT_FAILURE;
   }
-}//
+}

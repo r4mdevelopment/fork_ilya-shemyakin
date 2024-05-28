@@ -29,7 +29,7 @@ namespace sokolov
 
   struct Polygon //
   {
-    std::vector< Point > points; 
+    std::vector< Point > points;
     bool operator <(const Polygon& other) const; //
     bool operator==(const Polygon& other) const; //
     double getArea() const;
