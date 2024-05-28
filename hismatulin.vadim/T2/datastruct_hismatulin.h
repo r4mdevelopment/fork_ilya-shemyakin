@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <iomanip>
+#include <iterator>
 #include <complex>
 #include <algorithm>
 #include <exception>
