@@ -36,7 +36,7 @@ bool Dictionary::deleteWord(std::string& key)
 
 bool Dictionary::search(std::string& key) const
 {
-  return dic_.find(key) != dic_.end();
+  return (dic_.find(key) != dic_.end());
 }
 
 void Dictionary::print(std::ostream& out) const

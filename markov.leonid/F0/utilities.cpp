@@ -16,10 +16,10 @@ namespace mrkv
 	out << "STAT - Вывести количество слов в словаре.\n";
 	out << "HELP - Помощь.\n";
   }
-
+  
   bool isCleanStr(std::string& str)
   {
-	return str.find_first_of("0123456789~!@#$;%:^&?*()-_+=[]{}|/'.,\n") == std::string::npos;
+	return (str.find_first_of("0123456789~!@#$;%:^&?*()-_+=[]{}|/'.,\n") == std::string::npos);
   }
 
   void makeNormal(std::string& str)
