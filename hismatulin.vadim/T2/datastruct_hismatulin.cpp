@@ -26,7 +26,7 @@ namespace hismatulin
     }
     double real = 0.0;
     double imag = 0.0;
-    in >> DelimiterIO{'('} >> real >> imag >> DelimiterIO{')'};
+    in >> DelimiterIO{ '(' } >> real >> imag >> DelimiterIO{ ')' };
     if (in)
     {
       dest.ref = std::complex<double>(real, imag);
@@ -48,7 +48,7 @@ namespace hismatulin
     {
       return in;
     }
-    in >> dest.ref >> DelimiterIO{'u'} >> DelimiterIO{'l'} >> DelimiterIO{'l'};
+    in >> dest.ref >> DelimiterIO{ 'u' } >> DelimiterIO{ 'l' } >> DelimiterIO{ 'l' };
     if (!in)
     {
       in.setstate(std::ios::failbit);
@@ -63,7 +63,7 @@ namespace hismatulin
     {
       return in;
     }
-    return std::getline(in >> DelimiterIO{'"'}, dest.ref, '"');
+    return std::getline(in >> DelimiterIO{ '"' }, dest.ref, '"');
   }
   std::istream& operator>>(std::istream& in, DataStruct& dest)
   {
@@ -72,42 +72,45 @@ namespace hismatulin
     {
       return in;
     }
-    using sep = DelimiterIO;
-    using ULL = ULL_ST;
-    using cmp = CMPDouble_ST;
-    using str = String_ST;
-    in >> sep{ '(' };
-    bool flag1 = false, flag2 = false, flag3 = false;
-    while (true)
+    DataStruct input;
     {
-      if (flag1 && flag2 && flag3) break;
-      std::string key;
-      char c;
-      in >> c;
-      if (!in) break;
-      if (c == ':' && (in >> key))
+      using sep = DelimiterIO;
+      using cmp = CMPDouble_ST;
+      using ull = ULL_ST;
+      using str = String_ST;
+      in >> sep{ '(' };
+      bool flag1 = false, flag2 = false, flag3 = false;
+      while (true)
       {
-        if (key == "key1")
+        if (flag1 && flag2 && flag3) break;
+        std::string key = "";
+        char c = '0';
+        in >> c;
+        if (!in) break;
+        if (c == ':' && (in >> key))
         {
-          in >> ULL{ dest.key1 };
-          flag1 = true;
-        }
-        else if (key == "key2")
-        {
-          in >> sep{ '#' } >> sep{ 'c' } >> cmp{ dest.key2 };
-          flag2 = true;
-        }
-        else if (key == "key3")
-        {
-          in >> str{ dest.key3 };
-          flag3 = true;
+          if (key == "key1")
+          {
+            in >> ull{ input.key1 };
+            flag1 = true;
+          }
+          else if (key == "key2")
+          {
+            in >> sep{ '#' } >> sep{ 'c' } >> cmp{ input.key2 };
+            flag2 = true;
+          }
+          else if (key == "key3")
+          {
+            in >> str{ input.key3 };
+            flag3 = true;
+          }
         }
       }
+      in >> sep{ ':' } >> sep{ ')' };
     }
-    in >> sep{ ':' } >> sep{ ')' };
-    if (!flag1 || !flag2 || !flag3)
+    if (in)
     {
-      in.setstate(std::ios::failbit);
+      dest = input;
     }
     return in;
   }
@@ -129,11 +132,11 @@ namespace hismatulin
   bool compareDataStruct(const DataStruct& ds_first, const DataStruct& ds_second)
   {
     double Re_first = ds_first.key2.real(),
-    Re_second = ds_second.key2.real(),
-    Im_first = ds_first.key2.imag(),
-    Im_second = ds_second.key2.imag(),
-    R_first = 0.0,
-    R_second = 0.0;
+      Re_second = ds_second.key2.real(),
+      Im_first = ds_first.key2.imag(),
+      Im_second = ds_second.key2.imag(),
+      R_first = 0.0,
+      R_second = 0.0;
     R_first = sqrt(pow(Re_first, 2) + pow(Im_first, 2));
     R_second = sqrt(pow(Re_second, 2) + pow(Im_second, 2));
     if (ds_first.key1 < ds_second.key1)
@@ -153,7 +156,7 @@ namespace hismatulin
     }
     return false;
   }
-  iofmtguard::iofmtguard(std::basic_ios< char >& s):
+  iofmtguard::iofmtguard(std::basic_ios< char >& s) :
     s_(s),
     fill_(s.fill()),
     precision_(s.precision()),
@@ -166,5 +169,3 @@ namespace hismatulin
     s_.flags(fmt_);
   }
 }
-
-

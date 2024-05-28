@@ -1,15 +1,12 @@
-#ifndef NAMESPACE_H
-#define NAMESPACE_H
+#ifndef datastructH
+#define datastructH
 #include <iostream>
-#include <sstream>
 #include <string>
-#include <cassert>
-#include <iterator>
 #include <vector>
 #include <iomanip>
+#include <iterator>
 #include <complex>
 #include <algorithm>
-#include <cmath>
 #include <exception>
 
 namespace hismatulin
@@ -40,10 +37,6 @@ namespace hismatulin
   {
     std::string& ref;
   };
-  struct Label_ST
-  {
-    std::string exp;
-  };
   class iofmtguard
   {
   public:
@@ -59,12 +52,8 @@ namespace hismatulin
   std::istream& operator>>(std::istream& in, CMPDouble_ST&& dest);
   std::istream& operator>>(std::istream& in, ULL_ST&& dest);
   std::istream& operator>>(std::istream& in, String_ST&& dest);
-  std::istream& operator>>(std::istream& in, Label_ST&& dest);
   std::istream& operator>>(std::istream& in, DataStruct& dest);
   std::ostream& operator<<(std::ostream& out, const DataStruct& dest);
-
   bool compareDataStruct(const DataStruct& ds_first, const DataStruct& ds_second);
 }
 #endif
-
-
