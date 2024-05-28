@@ -1,5 +1,4 @@
 #include <iostream>
-#include <windows.h>
 #include <fstream>
 #include <sstream>
 #include <limits>
@@ -9,8 +8,6 @@
 int main()
 {
   setlocale(LC_ALL, "");
-  SetConsoleCP(1251);
-  SetConsoleOutputCP(1251);
 
   Dictionary dictionary;
 
