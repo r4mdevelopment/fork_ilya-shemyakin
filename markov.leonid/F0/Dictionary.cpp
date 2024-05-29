@@ -11,15 +11,15 @@ bool Dictionary::add(std::string& key, std::string& translation)
     return false;
   }
 
-  if (search(key))
+  auto it = dict_.find(key);
+  if (it != dict_.cend())
   {
-    dic_.find(key)->second.insert(translation);
+    it->second.insert(translation);
   }
   else
   {
-    std::set<std::string> translationsSet;
-    translationsSet.insert(translation);
-    dic_.insert({ key, translationsSet });
+    std::set<std::string> translationsSet = { translation };
+    dict_.insert({ key, translationsSet });
   }
   return true;
 }
@@ -27,70 +27,35 @@ bool Dictionary::add(std::string& key, std::string& translation)
 bool Dictionary::deleteWord(std::string& key)
 {
   mrkv::makeNormal(key);
-  if (!search(key))
-  {
-    return false;
-  }
-  dic_.erase(key);
-  return true;
+  return dict_.erase(key) != 0;
 }
 
-bool Dictionary::search(std::string& key) const
+Dictionary::const_iterator Dictionary::search(std::string& key) const
 {
-  return (dic_.find(key) != dic_.end());
-}
-
-void Dictionary::print(std::ostream& out) const
-{
-  for (const auto& i : dic_)
-  {
-    out << i.first << " -";
-    size_t k = 0;
-    for (const auto& j : i.second)
-    {
-      if (i.second.size() - 1 == k)
-      {
-        out << " " << j;
-      }
-      else
-      {
-        out << " " << j << ",";
-      }
-      ++k;
-    }
-    out << "\n";
-  }
-}
-
-bool Dictionary::printByKey(std::ostream& out, std::string& key) const
-{
-  mrkv::makeNormal(key);
-  if (search(key))
-  {
-    out << key << " -";
-    size_t k = 0;
-    for(const auto& i : dic_.find(key)->second)
-    {
-      if (dic_.find(key)->second.size() - 1 == k)
-      {
-        out << " " << i;
-      }
-      else
-      {
-        out << " " << i << ",";
-      }
-      ++k;
-    }
-    out << "\n";
-    return true;
-  }
-  else
-  {
-    return false;
-  }
+  return dict_.find(key);
 }
 
 size_t Dictionary::size() const
 {
-  return dic_.size();
+  return dict_.size();
+}
+
+Dictionary::iterator Dictionary::begin()
+{
+  return dict_.begin();
+}
+
+Dictionary::iterator Dictionary::end()
+{
+  return dict_.end();
+}
+
+Dictionary::const_iterator Dictionary::cbegin() const
+{
+  return dict_.cbegin();
+}
+
+Dictionary::const_iterator Dictionary::cend() const
+{
+  return dict_.cend();
 }
