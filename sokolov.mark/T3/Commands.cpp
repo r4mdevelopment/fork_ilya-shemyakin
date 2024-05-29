@@ -133,7 +133,7 @@ void commands::countFigures(const std::vector<sokolov::Polygon>& polygons)
   int number = convertToNumber(argument);
 
   //проходимся по полигонам и увеличиваем счетчик, если их размер подходит под условие
-  auto count = [&number](const sokolov::Polygon& poly, const std::string& method) 
+  auto count = [&number](const sokolov::Polygon& poly, const std::string& method)
     {
       if (method == "EVEN")
       {
