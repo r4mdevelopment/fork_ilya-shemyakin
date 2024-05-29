@@ -5,11 +5,13 @@ using namespace std::placeholders;
 
 const std::string I_C = "<INVALID COMMAND>";
 
-//converter from string to integer
+//Преобразование строки в число
 int commands::convertToNumber(const std::string& str)
 {
   char* end;
-  int convertedResult = strtol(str.c_str(), &end, 10);
+  //строку в число (10 - система счисления, 
+  // end - указатель на первый символ, который не был преобразован
+  int convertedResult = strtol(str.c_str(), &end, 10); 
   if (*end != 0)
   {
     return -1;
@@ -17,13 +19,13 @@ int commands::convertToNumber(const std::string& str)
   return convertedResult;
 }
 
-//get total area of figures due to parameteres(method)
+//Получение общей площади фигур в зависимости от аргумента
 void commands::getFullArea(const std::vector<sokolov::Polygon>& polygons)
 {
   std::string argument;
   std::cin >> argument;
   int number = convertToNumber(argument);
-  auto accumulatePolygonsArea =
+  auto accumulatePolygonsArea = //прибавление площади полигона к общей по нужным правилам
     [&polygons, &number](double accumulatedArea, const sokolov::Polygon& current, const std::string method)
     {
       double result = accumulatedArea;
@@ -49,7 +51,7 @@ void commands::getFullArea(const std::vector<sokolov::Polygon>& polygons)
   {
     if (argument == "EVEN" || argument == "ODD")
     {
-      std::cout << std::accumulate(polygons.begin(), polygons.end(), 0.0,
+      std::cout << std::accumulate(polygons.begin(), polygons.end(), 0.0, //сложение площадей всех полигонов
         std::bind(accumulatePolygonsArea, _1, _2, argument)) << std::endl;
     }
     else if (argument == "MEAN" && polygons.size() != 0)
@@ -62,7 +64,7 @@ void commands::getFullArea(const std::vector<sokolov::Polygon>& polygons)
       throw I_C;
     }
   }
-  else if (number > 2)
+  else if (number > 2) //если аргумент цифра
   {
     std::cout << std::accumulate(polygons.begin(), polygons.end(), 0.0,
       std::bind(accumulatePolygonsArea, _1, _2, "SPECIAL")) << std::endl;
@@ -73,7 +75,7 @@ void commands::getFullArea(const std::vector<sokolov::Polygon>& polygons)
   }
 }
 
-//calculate min area
+//вычисление минимальной площади/размера
 void commands::getMin(const std::vector<sokolov::Polygon>& data)
 {
   std::string arg;
@@ -86,9 +88,9 @@ void commands::getMin(const std::vector<sokolov::Polygon>& data)
   std::vector<size_t> sizeVec(data.size());
 
   std::transform(data.begin(), data.end(), sizeVec.begin(),
-    [](const Polygon& poly) { return poly.points.size(); });
+    [](const Polygon& poly) { return poly.points.size(); }); //кол-во точек в полигоне
   auto poly = std::min_element(data.begin(), data.end());
-  auto minSize = std::min_element(sizeVec.begin(), sizeVec.end());
+  auto minSize = std::min_element(sizeVec.begin(), sizeVec.end()); //минимум точек у полигона
 
   if (arg == "AREA")
     std::cout << poly->getArea() << std::endl;
@@ -98,7 +100,7 @@ void commands::getMin(const std::vector<sokolov::Polygon>& data)
     throw I_C;
 }
 
-//calculate max area
+//вычисление максимальной площади/размера
 void commands::getMax(const std::vector<sokolov::Polygon>& data)
 {
   std::string arg;
@@ -111,9 +113,9 @@ void commands::getMax(const std::vector<sokolov::Polygon>& data)
   std::vector<size_t> sizeVec(data.size());
 
   std::transform(data.begin(), data.end(), sizeVec.begin(),
-    [](const Polygon& poly) { return poly.points.size(); });
+    [](const Polygon& poly) { return poly.points.size(); }); //кол-во точек в полигоне
   auto poly = std::max_element(data.begin(), data.end());
-  auto maxSize = std::max_element(sizeVec.begin(), sizeVec.end());
+  auto maxSize = std::max_element(sizeVec.begin(), sizeVec.end()); //максимум точек у полигона
 
   if (arg == "AREA")
     std::cout << poly->getArea() << std::endl;
@@ -123,13 +125,15 @@ void commands::getMax(const std::vector<sokolov::Polygon>& data)
     throw I_C;
 }
 
-//calculate all figures due to parameteres(method)
+//вычисление количества фигур в зависимости от аргумента
 void commands::countFigures(const std::vector<sokolov::Polygon>& polygons)
 {
   std::string argument;
   std::cin >> argument;
   int number = convertToNumber(argument);
-  auto count = [&number](const sokolov::Polygon& poly, const std::string& method)
+
+  //проходимся по полигонам и увеличиваем счетчик, если их размер подходит под условие
+  auto count = [&number](const sokolov::Polygon& poly, const std::string& method) 
     {
       if (method == "EVEN")
       {
@@ -145,6 +149,7 @@ void commands::countFigures(const std::vector<sokolov::Polygon>& polygons)
       }
       return false;
     };
+
   if (number == -1)
   {
     if (argument == "EVEN" || argument == "ODD")
@@ -166,62 +171,7 @@ void commands::countFigures(const std::vector<sokolov::Polygon>& polygons)
   }
 }
 
-//get frame of figures
-sokolov::FrameRectangle commands::getFrameRectangle(const std::vector<sokolov::Polygon>& polygons)
-{
-  sokolov::FrameRectangle frame;
-  frame.bottom_left.x = std::numeric_limits<int>::max();
-  frame.bottom_left.y = std::numeric_limits<int>::max();
-  frame.top_right.x = std::numeric_limits<int>::min();
-  frame.top_right.y = std::numeric_limits<int>::min();
-  auto comparatorwithX =
-    [](const sokolov::Point& pointFirst, const sokolov::Point& pointSecond)
-    {
-      return pointFirst.x < pointSecond.x;
-    };
-  auto comparatorwithY =
-    [](const sokolov::Point& pointFirst, const sokolov::Point& pointSecond)
-    {
-      return pointFirst.y < pointSecond.y;
-    };
-  frame = std::accumulate(polygons.begin(), polygons.end(), frame,
-    [&](sokolov::FrameRectangle frame, const sokolov::Polygon& polygon)
-    {
-      auto min_x = std::min_element(polygon.points.begin(), polygon.points.end(), comparatorwithX);
-      auto min_y = std::min_element(polygon.points.begin(), polygon.points.end(), comparatorwithY);
-      auto max_x = std::max_element(polygon.points.begin(), polygon.points.end(), comparatorwithX);
-      auto max_y = std::max_element(polygon.points.begin(), polygon.points.end(), comparatorwithY);
-      frame.bottom_left.x = std::min(frame.bottom_left.x, min_x->x);
-      frame.bottom_left.y = std::min(frame.bottom_left.y, min_y->y);
-      frame.top_right.x = std::max(frame.top_right.x, max_x->x);
-      frame.top_right.y = std::max(frame.top_right.y, max_y->y);
-      return frame;
-    }
-  );
-  return frame;
-}
-
-void commands::checkStream()
-{
-  int streamState = std::cin.get();
-
-  while (streamState != int('\n') && streamState != EOF)
-  {
-    if (!isspace(streamState))
-    {
-      std::cin.setstate(std::istream::failbit);
-      break;
-    }
-    streamState = std::cin.get();
-  }
-
-  if (!std::cin)
-  {
-    std::cin.clear();
-    throw I_C;
-  }
-}
-
+//кол-во полигонов с площадью меньше, чем у полигона в параметре
 void commands::lessarea(std::vector<sokolov::Polygon>& value)
 {
   if (value.empty())
@@ -230,15 +180,15 @@ void commands::lessarea(std::vector<sokolov::Polygon>& value)
   }
 
   sokolov::Polygon mainEl, otherEl;
-  std::cin >> mainEl;
-  int prov = std::cin.get();
-  for (;;)
+  std::cin >> mainEl; //основной полигон
+  int prov = std::cin.get(); //считать один символ
+  for (;;) //while(true)
   {
-    if (prov == int('\n') || prov == std::iostream::traits_type::eof())
+    if (prov == int('\n') || prov == std::iostream::traits_type::eof()) //int('\n') -> \n в int
     {
       break;
     }
-    if (!isspace(prov))
+    if (!isspace(prov)) //проверка на пробельный символ
     {
       std::cin.setstate(std::ios_base::failbit);
       break;
@@ -255,13 +205,13 @@ void commands::lessarea(std::vector<sokolov::Polygon>& value)
   auto calcConcur = [&](const sokolov::Polygon tPolygon)
     {
       otherEl = tPolygon;
-      bool rez = mainEl.getArea() > otherEl.getArea();
+      bool rez = mainEl.getArea() > otherEl.getArea(); //подсчёт полигонов
       return rez;
     };
   std::cout << std::count_if(value.begin(), value.end(), calcConcur) << "\n";
 }
 
-//get intersections
+//кол-во полигонов, с которыми пересекается
 void commands::intersections(const std::vector<sokolov::Polygon>& data)
 {
   Polygon trg;
@@ -272,7 +222,7 @@ void commands::intersections(const std::vector<sokolov::Polygon>& data)
 
   while (ch != int('\n') && ch != EOF)
   {
-    if (!isspace(ch))
+    if (!isspace(ch)) //
     {
       std::cin.setstate(std::istream::failbit);
       break;
@@ -287,7 +237,7 @@ void commands::intersections(const std::vector<sokolov::Polygon>& data)
   }
 
   auto cntFunc = [&trg]
-  (const Polygon& poly)
+  (const Polygon& poly) //подсчёт, сколько полигонов пересекаются с заданным
     {
       return poly.isIntersect(trg);
     };

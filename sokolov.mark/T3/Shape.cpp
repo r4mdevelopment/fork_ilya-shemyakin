@@ -40,7 +40,7 @@ bool sokolov::Segment::isIntersect(const Segment& other, std::pair<double, doubl
 
   if (intr != nullptr)
     *intr = std::make_pair(double(begin.x) + (end.x - begin.x) * t1,
-      double(begin.y) + (end.y - begin.y) * t1);
+      double(begin.y) + (end.y - begin.y) * t1); //координаты точки пересечения
 
   return true;
 }
@@ -57,9 +57,9 @@ bool sokolov::Polygon::contains(const Point& pnt) const
 
   Point outOfBounds = { maxX + 3, pnt.y };
   Segment ray = { pnt, outOfBounds };
-  auto sgmtPool = createSegmentPool();
+  auto sgmtPool = createSegmentPool(); //все ребра многоугольника
 
-  std::vector<std::pair<double, double>> intrPoints(points.size());
+  std::vector<std::pair<double, double>> intrPoints(points.size()); //точки пересечения луча
 
   auto addPoint = [&ray]
   (const Segment& sgmt)
@@ -74,15 +74,15 @@ bool sokolov::Polygon::contains(const Point& pnt) const
   auto removeCond = []
   (const std::pair<double, double>& p)
     {
-      return std::isnan(p.first) || std::isnan(p.second);
+      return std::isnan(p.first) || std::isnan(p.second); //nan - not a number
     };
 
   std::transform(sgmtPool.begin(), sgmtPool.end(), intrPoints.begin(), addPoint);
-  auto ri = std::remove_if(intrPoints.begin(), intrPoints.end(), removeCond);
+  auto ri = std::remove_if(intrPoints.begin(), intrPoints.end(), removeCond); //наполнение вектора
 
-  intrPoints.erase(ri, intrPoints.end());
+  intrPoints.erase(ri, intrPoints.end()); //удаление плохих результатов
   std::sort(intrPoints.begin(), intrPoints.end());
-  auto last = std::unique(intrPoints.begin(), intrPoints.end());
+  auto last = std::unique(intrPoints.begin(), intrPoints.end()); //удаление дубликатов
   intrPoints.erase(last, intrPoints.end());
 
   return intrPoints.size() & 1;
@@ -113,18 +113,18 @@ bool sokolov::Polygon::isIntersect(const Polygon& other) const
   auto otherSegments = other.createSegmentPool();
   auto ourSegments = createSegmentPool();
 
-  auto countInner = [&]
+  auto countInner = [&] //ac и pnt захватываются по ссылке
   (int ac, const Point& pnt)
     {
       return ac + contains(pnt);
     };
 
-  int inner = std::accumulate(other.points.begin(), other.points.end(), 0, countInner);
+  int inner = std::accumulate(other.points.begin(), other.points.end(), 0, countInner); //складывает количество точек внутри
 
   if (inner != 0)
     return true;
 
-  auto countIntrOneIter = [&]
+  auto countIntrOneIter = [&] //пересекается ли сегмент с любым из сегментов другого многоугольника
   (int ac, const Segment& sgmt)
     {
       auto countIntrNested = [&sgmt]
@@ -145,8 +145,6 @@ bool sokolov::Polygon::operator < (const Polygon& other) const
 {
   return getArea() < other.getArea();
 }
-
-
 
 bool sokolov::Polygon::operator == (const Polygon& other) const
 {
