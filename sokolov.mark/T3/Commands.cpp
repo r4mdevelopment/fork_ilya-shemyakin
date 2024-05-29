@@ -185,6 +185,24 @@ void commands::lessarea(std::vector<sokolov::Polygon>& value)
   sokolov::Polygon mainEl, otherEl;
   std::cin >> mainEl; //основной полигон
 
+  int ch = std::cin.get();
+
+  while (ch != int('\n') && ch != EOF)
+  {
+    if (!isspace(ch))
+    {
+      std::cin.setstate(std::istream::failbit);
+      break;
+    }
+    ch = std::cin.get();
+  }
+
+  if (!std::cin)
+  {
+    std::cin.clear();
+    throw I_C;
+  }
+
   auto calcConcur = [&](const sokolov::Polygon tPolygon)
     {
       otherEl = tPolygon;
@@ -200,6 +218,24 @@ void commands::intersections(const std::vector<sokolov::Polygon>& data)
   Polygon trg;
 
   std::cin >> trg;
+
+  int ch = std::cin.get();
+
+  while (ch != int('\n') && ch != EOF)
+  {
+    if (!isspace(ch))
+    {
+      std::cin.setstate(std::istream::failbit);
+      break;
+    }
+    ch = std::cin.get();
+  }
+
+  if (!std::cin)
+  {
+    std::cin.clear();
+    throw I_C;
+  }
 
   // Используем std::bind для создания объекта функции
   auto cntFunc = std::bind(&Polygon::isIntersect, _1, std::ref(trg));
