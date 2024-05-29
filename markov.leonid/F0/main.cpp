@@ -26,7 +26,7 @@ int main()
     {
       std::string filename;
       std::cin >> filename;
-	  std::ifstream file(filename);
+      std::ifstream file(filename);
       if (!file.is_open())
       {
         std::cerr << "<FSTREAM ERROR>" << std::endl;
@@ -90,7 +90,7 @@ int main()
         printTranslations(std::cout, it->second);
       }
       else
-	  {
+      {
         std::cout << "<WORD DOESN'T EXIST>" << std::endl;
       }
     }
