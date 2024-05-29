@@ -9,9 +9,9 @@ const std::string I_C = "<INVALID COMMAND>";
 int commands::convertToNumber(const std::string& str)
 {
   char* end;
-  //строку в число (10 - система счисления, 
-  // end - указатель на первый символ, который не был преобразован
-  int convertedResult = strtol(str.c_str(), &end, 10); 
+  //строку в число (10 - система счисления,
+  //end - указатель на первый символ, который не был преобразован
+  int convertedResult = strtol(str.c_str(), &end, 10);
   if (*end != 0)
   {
     return -1;
