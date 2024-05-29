@@ -83,7 +83,6 @@ bool comparePolygonsByVerticesCount(const sokolov::Polygon& a, const sokolov::Po
 //вычисление минимальной площади/размера
 void commands::getMin(const std::vector<sokolov::Polygon>& data)
 {
-
   std::string arg;
 
   std::cin >> arg;
@@ -203,7 +202,7 @@ void commands::intersections(const std::vector<sokolov::Polygon>& data)
   std::cin >> trg;
 
   // Используем std::bind для создания объекта функции
-  auto cntFunc = std::bind(&Polygon::isIntersect, _1, std::ref(trg)); //исправить & на 
+  auto cntFunc = std::bind(&Polygon::isIntersect, _1, std::ref(trg));
 
   // Вызываем std::count_if с объектом функции, созданным с помощью std::bind
   std::cout << std::count_if(data.begin(), data.end(), cntFunc) << std::endl;
