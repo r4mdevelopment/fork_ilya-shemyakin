@@ -75,9 +75,15 @@ void commands::getFullArea(const std::vector<sokolov::Polygon>& polygons)
   }
 }
 
+// Функция сравнения, которая возвращает true, если первый полигон имеет меньше вершин, чем второй
+bool comparePolygonsByVerticesCount(const sokolov::Polygon& a, const sokolov::Polygon& b) {
+  return a.points.size() < b.points.size();
+}
+
 //вычисление минимальной площади/размера
 void commands::getMin(const std::vector<sokolov::Polygon>& data)
 {
+
   std::string arg;
 
   std::cin >> arg;
@@ -85,19 +91,22 @@ void commands::getMin(const std::vector<sokolov::Polygon>& data)
   if (data.size() == 0)
     throw I_C;
 
-  std::vector<size_t> sizeVec(data.size());
-
-  std::transform(data.begin(), data.end(), sizeVec.begin(),
-    [](const Polygon& poly) { return poly.points.size(); }); //кол-во точек в полигоне
-  auto poly = std::min_element(data.begin(), data.end());
-  auto minSize = std::min_element(sizeVec.begin(), sizeVec.end()); //минимум точек у полигона
-
   if (arg == "AREA")
+  {
+    //полигон с наименьшой площадью
+    auto poly = std::min_element(data.begin(), data.end());
     std::cout << poly->getArea() << std::endl;
+  }
   else if (arg == "VERTEXES")
-    std::cout << *minSize << std::endl;
+  {
+    //полигон с наименьшим кол-вом вершин
+    auto minSize = std::min_element(data.begin(), data.end(), comparePolygonsByVerticesCount);
+    std::cout << minSize->points.size() << std::endl;
+  }
   else
+  {
     throw I_C;
+  }
 }
 
 //вычисление максимальной площади/размера
@@ -171,36 +180,11 @@ void commands::countFigures(const std::vector<sokolov::Polygon>& polygons)
   }
 }
 
-//кол-во полигонов с площадью меньше, чем у полигона в параметре
+//кол-во полигонов с площадью меньше, чем у переданного полигона
 void commands::lessarea(std::vector<sokolov::Polygon>& value)
 {
-  if (value.empty())
-  {
-    throw I_C;
-  }
-
   sokolov::Polygon mainEl, otherEl;
   std::cin >> mainEl; //основной полигон
-  int prov = std::cin.get(); //считать один символ
-  for (;;) //while(true)
-  {
-    if (prov == int('\n') || prov == std::iostream::traits_type::eof()) //int('\n') -> \n в int
-    {
-      break;
-    }
-    if (!isspace(prov)) //проверка на пробельный символ
-    {
-      std::cin.setstate(std::ios_base::failbit);
-      break;
-    }
-    prov = std::cin.get();
-  }
-
-  if (std::cin.fail())
-  {
-    std::cin.clear();
-    throw I_C;
-  }
 
   auto calcConcur = [&](const sokolov::Polygon tPolygon)
     {
@@ -218,29 +202,9 @@ void commands::intersections(const std::vector<sokolov::Polygon>& data)
 
   std::cin >> trg;
 
-  int ch = std::cin.get();
+  // Используем std::bind для создания объекта функции
+  auto cntFunc = std::bind(&Polygon::isIntersect, _1, std::ref(trg)); //исправить & на 
 
-  while (ch != int('\n') && ch != EOF)
-  {
-    if (!isspace(ch)) //
-    {
-      std::cin.setstate(std::istream::failbit);
-      break;
-    }
-    ch = std::cin.get();
-  }
-
-  if (!std::cin)
-  {
-    std::cin.clear();
-    throw I_C;
-  }
-
-  auto cntFunc = [&trg]
-  (const Polygon& poly) //подсчёт, сколько полигонов пересекаются с заданным
-    {
-      return poly.isIntersect(trg);
-    };
-
+  // Вызываем std::count_if с объектом функции, созданным с помощью std::bind
   std::cout << std::count_if(data.begin(), data.end(), cntFunc) << std::endl;
 }
