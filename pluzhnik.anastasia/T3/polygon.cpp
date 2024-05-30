@@ -1,6 +1,7 @@
 #include <iterator>
 #include <algorithm>
 #include <numeric>
+#include <cmath>
 #include "polygon.hpp"
 
 std::istream& pluzhnik::operator>>(std::istream& in, DelimiterIO&& dest)
