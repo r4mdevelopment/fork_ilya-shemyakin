@@ -4,13 +4,12 @@
 #include <functional>
 #include <iomanip>
 #include "command.hpp"
-#include "polygon.hpp" 
+#include "polygon.hpp"
 
 using namespace std::placeholders;
 
-
 void pluzhnik::getAreaEven(const std::vector< Polygon >& polygons, std::ostream& out)
-{  
+{
   auto lambda = [](double acc, const Polygon& polygon)
     {
       if (polygon.points_.size() % 2 == 0)
@@ -40,7 +39,7 @@ void pluzhnik::getAreaMean(const std::vector< Polygon >& polygons, std::ostream&
   {
     throw std::invalid_argument("<INVALID COMMAND>");
   }
-  out << std::accumulate(polygons.begin(), polygons.end(), 0.0, 
+  out << std::accumulate(polygons.begin(), polygons.end(), 0.0,
     [](double acc, const Polygon& polygon) { return acc += getArea(polygon);}) / polygons.size() << '\n';
 }
 
@@ -114,7 +113,7 @@ void pluzhnik::getCountOdd(const std::vector< Polygon >& polygons, std::ostream&
   {
     throw std::invalid_argument("<INVALID COMMAND>");
   }
-  out << std::count_if(polygons.begin(), polygons.end(), 
+  out << std::count_if(polygons.begin(), polygons.end(),
     [](const Polygon& polygon) { return polygon.points_.size() % 2 == 1;}) << "\n";
 }
 
