@@ -185,22 +185,25 @@ void commands::lessarea(std::vector<sokolov::Polygon>& value)
   sokolov::Polygon mainEl, otherEl;
   std::cin >> mainEl; //основной полигон
 
-  int ch = std::cin.get();
+  std::istream::pos_type pos = std::cin.tellg();
 
-  while (ch != int('\n') && ch != EOF)
-  {
-    if (!isspace(ch))
-    {
-      std::cin.setstate(std::istream::failbit);
-      break;
-    }
-    ch = std::cin.get();
-  }
+  std::istreambuf_iterator<char> it(std::cin), end;
+  std::istreambuf_iterator<char> result = std::find_if(it, end, [](char c) {
+    return !std::isspace(c) || c == EOF;
+    });
 
-  if (!std::cin)
+  if (result == end)
   {
     std::cin.clear();
-    throw I_C;
+  }
+  else
+  {
+    ++it;
+    std::cin.setstate(std::istream::failbit);
+    std::cin.clear();
+    throw "I_C";
+
+    std::cin.seekg(pos);
   }
 
   auto calcConcur = [&](const sokolov::Polygon tPolygon)
@@ -219,22 +222,25 @@ void commands::intersections(const std::vector<sokolov::Polygon>& data)
 
   std::cin >> trg;
 
-  int ch = std::cin.get();
+  std::istream::pos_type pos = std::cin.tellg();
 
-  while (ch != int('\n') && ch != EOF)
-  {
-    if (!isspace(ch))
-    {
-      std::cin.setstate(std::istream::failbit);
-      break;
-    }
-    ch = std::cin.get();
-  }
+  std::istreambuf_iterator<char> it(std::cin), end;
+  std::istreambuf_iterator<char> result = std::find_if(it, end, [](char c) {
+    return !std::isspace(c) || c == EOF;
+    });
 
-  if (!std::cin)
+  if (result == end) 
   {
     std::cin.clear();
-    throw I_C;
+  }
+  else
+  {
+    ++it;
+    std::cin.setstate(std::istream::failbit);
+    std::cin.clear();
+    throw "I_C";
+
+    std::cin.seekg(pos);
   }
 
   // Используем std::bind для создания объекта функции
