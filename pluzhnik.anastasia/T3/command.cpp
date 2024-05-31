@@ -40,7 +40,7 @@ void pluzhnik::getAreaMean(const std::vector< Polygon >& polygons, std::ostream&
     throw std::invalid_argument("<INVALID COMMAND>");
   }
   out << std::accumulate(polygons.begin(), polygons.end(), 0.0,
-    [](double acc, const Polygon& polygon) { return acc += getArea(polygon);}) / polygons.size() << '\n';
+    [](double acc, const Polygon& polygon) { return acc += getArea(polygon); }) / polygons.size() << '\n';
 }
 
 void pluzhnik::getAreaVertexes(const std::vector< Polygon >& polygons, size_t count, std::ostream& out)
@@ -99,30 +99,18 @@ void pluzhnik::getMinVertexes(const std::vector< Polygon >& polygons, std::ostre
 
 void pluzhnik::getCountEven(const std::vector< Polygon >& polygons, std::ostream& out)
 {
-  if (polygons.empty())
-  {
-    throw std::invalid_argument("<INVALID COMMAND>");
-  }
   out << std::count_if(polygons.begin(), polygons.end(),
     [](const Polygon& polygon) { return polygon.points_.size() % 2 == 0; }) << "\n";
 }
 
 void pluzhnik::getCountOdd(const std::vector< Polygon >& polygons, std::ostream& out)
 {
-  if (polygons.empty())
-  {
-    throw std::invalid_argument("<INVALID COMMAND>");
-  }
   out << std::count_if(polygons.begin(), polygons.end(),
-    [](const Polygon& polygon) { return polygon.points_.size() % 2 == 1;}) << "\n";
+    [](const Polygon& polygon) { return polygon.points_.size() % 2 == 1; }) << "\n";
 }
 
 void pluzhnik::getCountVertexes(const std::vector< Polygon >& polygons, size_t count, std::ostream& out)
 {
-  if (polygons.empty())
-  {
-    throw std::invalid_argument("<INVALID COMMAND>");
-  }
   out << std::count_if(polygons.begin(), polygons.end(),
     [&count](const Polygon& polygon) { return polygon.points_.size() == count; }) << "\n";
 }
@@ -151,6 +139,7 @@ void pluzhnik::getSame(std::vector< Polygon >& polygons, std::istream& in, std::
   {
     throw std::invalid_argument("<INVALID COMMAND>");
   }
+  std::sort(polygon.points_.begin(), polygon.points_.end(), pointsComparator);
 
   out << std::count_if(polygons.begin(), polygons.end(), std::bind(isSame, _1, polygon)) << '\n';
 }
@@ -163,7 +152,6 @@ bool pluzhnik::isSame(Polygon lhs, Polygon rhs)
   }
 
   std::sort(lhs.points_.begin(), lhs.points_.end(), pointsComparator);
-  std::sort(rhs.points_.begin(), rhs.points_.end(), pointsComparator);
 
   int diffX = lhs.points_[0].x_ - rhs.points_[0].x_;
   int diffY = lhs.points_[0].y_ - rhs.points_[0].y_;
@@ -180,5 +168,6 @@ bool pluzhnik::isSame(Polygon lhs, Polygon rhs)
       ++offSet;
       return !(point.x_ == rhs.points_[offSet].x_ && point.y_ == rhs.points_[offSet].y_);
     };
+  // Cчитаем количество несовпадающих точек
   return std::count_if(lhs.points_.begin(), lhs.points_.end(), lambda) == 0;
 }

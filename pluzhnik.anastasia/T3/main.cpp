@@ -83,11 +83,35 @@ int main(int argc, char* argv[])
       {
         std::string arg = "";
         std::cin >> arg;
+        if (arg == "AREA")
+        {
+          getMaxArea(data, std::cout);
+        }
+        else if (arg == "VERTEXES")
+        {
+          getMaxVertexes(data, std::cout);
+        }
+        else
+        {
+          throw std::invalid_argument("<INVALID COMMAND>");
+        }
       }
       else if (cmd == "MIN")
       {
         std::string arg = "";
         std::cin >> arg;
+        if (arg == "AREA")
+        {
+          getMinArea(data, std::cout);
+        }
+        else if (arg == "VERTEXES")
+        {
+          getMinVertexes(data, std::cout);
+        }
+        else
+        {
+          throw std::invalid_argument("<INVALID COMMAND>");
+        }
       }
       else if (cmd == "COUNT")
       {
