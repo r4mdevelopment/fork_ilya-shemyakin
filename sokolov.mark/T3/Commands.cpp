@@ -229,7 +229,7 @@ void commands::intersections(const std::vector<sokolov::Polygon>& data)
     return !std::isspace(c) || c == EOF;
     });
 
-  if (result == end) 
+  if (result == end)
   {
     std::cin.clear();
   }
