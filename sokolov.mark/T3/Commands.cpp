@@ -186,7 +186,7 @@ void commands::lessarea(std::vector<sokolov::Polygon>& value)
   std::cin >> mainEl; //основной полигон
 
   std::istreambuf_iterator<char> it(std::cin), end;
-  std::istreambuf_iterator<char> result = std::find_if(it, end, [](unsigned char c) {
+  std::istreambuf_iterator<char> result = std::find_if(it, end, [](char c) {
     return !std::isspace(c) || c == EOF;
     });
 
@@ -212,7 +212,7 @@ void commands::intersections(const std::vector<sokolov::Polygon>& data)
   std::cin >> trg;
 
   std::istreambuf_iterator<char> it(std::cin), end;
-  std::istreambuf_iterator<char> result = std::find_if(it, end, [](unsigned char c) {
+  std::istreambuf_iterator<char> result = std::find_if(it, end, [](char c) {
     return !std::isspace(c) || c == EOF;
     });
 
