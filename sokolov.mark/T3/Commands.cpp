@@ -185,12 +185,7 @@ void commands::lessarea(std::vector<sokolov::Polygon>& value)
   sokolov::Polygon mainEl, otherEl;
   std::cin >> mainEl; //основной полигон
 
-  std::istreambuf_iterator<char> it(std::cin), end;
-  std::istreambuf_iterator<char> result = std::find_if(it, end, [](char c) {
-    return !std::isspace(c) || c == EOF;
-    });
-
-  if (result != end)
+  if (std::cin.fail() || std::cin.get() != '\n')
   {
     throw I_C;
   }
@@ -211,16 +206,10 @@ void commands::intersections(const std::vector<sokolov::Polygon>& data)
 
   std::cin >> trg;
 
-  std::istreambuf_iterator<char> it(std::cin), end;
-  std::istreambuf_iterator<char> result = std::find_if(it, end, [](char c) {
-    return !std::isspace(c) || c == EOF;
-    });
-
-  if (result != end)
+  if (std::cin.fail() || std::cin.get() != '\n')
   {
     throw I_C;
   }
-
   // Используем std::bind для создания объекта функции
   auto cntFunc = std::bind(&Polygon::isIntersect, _1, std::ref(trg));
 
