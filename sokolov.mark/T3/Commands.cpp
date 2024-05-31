@@ -185,7 +185,7 @@ void commands::lessarea(std::vector<sokolov::Polygon>& value)
   sokolov::Polygon mainEl, otherEl;
   std::cin >> mainEl; //основной полигон
 
-  if (std::cin.fail() || std::cin.get() != '\n')
+  if (!std::cin || std::cin.peek() != '\n')
   {
     throw I_C;
   }
@@ -206,7 +206,7 @@ void commands::intersections(const std::vector<sokolov::Polygon>& data)
 
   std::cin >> trg;
 
-  if (std::cin.fail() || std::cin.get() != '\n')
+  if (!std::cin || std::cin.peek() != '\n')
   {
     throw I_C;
   }

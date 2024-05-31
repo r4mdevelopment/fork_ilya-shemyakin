@@ -69,6 +69,7 @@ int main(int argC, char* argV[])
       catch (const std::string& err)
       {
         std::cout << err << std::endl;
+        std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
       }
     }
