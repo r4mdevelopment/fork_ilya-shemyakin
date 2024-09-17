@@ -27,6 +27,10 @@ double T3_hism::area(std::vector<Polygon>& data, std::string& arg)
     }
     else if (arg == "MEAN")
     {
+      if (!data.size() > 0)
+      {
+        throw std::invalid_argument("<INVALID COMMAND>");
+      }
       return std::accumulate(data.begin(), data.end(), 0.0, std::bind(getSumArea_Param, _1, _2, -10, 0))/data.size();
     }
     else
@@ -46,6 +50,9 @@ double T3_hism::area(std::vector<Polygon>& data, std::string& arg)
 
 double T3_hism::maxArea(std::vector<Polygon>& data)
 {
+  if (!data.size() > 0) {
+    throw std::invalid_argument("<INVALID COMMAND>");
+  }
   return getPolygonArea(*std::max_element(data.begin(), data.end(), [](const Polygon& a, const Polygon& b)
     {
     return getPolygonArea(a) < getPolygonArea(b);
@@ -54,6 +61,9 @@ double T3_hism::maxArea(std::vector<Polygon>& data)
 
 int T3_hism::maxVertexes(std::vector<Polygon>& data)
 {
+  if (!data.size() > 0) {
+    throw std::invalid_argument("<INVALID COMMAND>");
+  }
   return (std::max_element(data.begin(), data.end(), [](const Polygon& a, const Polygon& b)
     {
     return a.points.size() < b.points.size();

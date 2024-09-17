@@ -90,7 +90,7 @@ int main(int argc, char* argv[]) {
         }
       }
       catch (const std::invalid_argument& exception) {
-        std::cout << "Îøèáêà: " << exception.what() << std::endl;
+        std::cout << exception.what() << std::endl;
         std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
       }
