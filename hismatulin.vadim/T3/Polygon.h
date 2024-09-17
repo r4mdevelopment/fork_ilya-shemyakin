@@ -7,14 +7,15 @@ namespace T3_hism
 {
   struct Point
   {
-    int x, y;
-    bool operator==(const Point& other) const {
+    int x,y;
+    bool operator==(const Point& other) const
+    {
       return x == other.x && y == other.y;
     }
   };
   struct Polygon
   {
-    std::vector< Point > points;
+    std::vector<Point> points;
   };
   struct DelimiterIO
   {
