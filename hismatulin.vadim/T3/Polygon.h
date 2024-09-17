@@ -3,7 +3,7 @@
 #include <vector>
 #include <iostream>
 
-namespace T3_hism 
+namespace T3_hism
 {
   struct Point
   {
