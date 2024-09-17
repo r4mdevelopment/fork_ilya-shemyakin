@@ -1,10 +1,12 @@
 #include "Polygon.h"
 #include <numeric>
+#include <iterator>
 #include <algorithm>
 #include <functional>
+#include <cmath>
 
 namespace T3_hism {
-  std::istream& T3_hism::operator>>(std::istream& in, DelimiterIO&& dest)
+  std::istream& operator>>(std::istream& in, DelimiterIO&& dest)
   {
     std::istream::sentry sentry(in);
     if (!sentry)
@@ -20,7 +22,7 @@ namespace T3_hism {
     return in;
   }
 
-  std::istream& T3_hism::operator>>(std::istream& in, Polygon& dest)
+  std::istream& operator>>(std::istream& in, Polygon& dest)
   {
     std::istream::sentry sentry(in);
     if (!sentry)
@@ -56,7 +58,7 @@ namespace T3_hism {
     return in;
   }
 
-  std::istream& T3_hism::operator>>(std::istream& in, Point& dest)
+  std::istream& operator>>(std::istream& in, Point& dest)
   {
     std::istream::sentry sentry(in);
     if (!sentry)
@@ -66,7 +68,7 @@ namespace T3_hism {
     in >> DelimiterIO{ '(' } >> dest.x >> DelimiterIO{ ';' } >> dest.y >> DelimiterIO{ ')' };
   }
 
-  std::vector<Polygon> T3_hism::readStream(std::istream& in)
+  std::vector<Polygon> readStream(std::istream& in)
   {
     std::vector<Polygon> data;
     while (!in.eof()) {
