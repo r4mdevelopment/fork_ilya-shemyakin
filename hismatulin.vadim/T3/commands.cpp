@@ -6,8 +6,8 @@
 int isString_num(std::string& data) {
   int x;
   x = strtol(data.c_str(), 0, 10);
-  if (x > 0) { return x; } // if the number
-  return 0; // if the string
+  if (x > 0) { return x; }
+  return 0;
 }
 
 double T3_hism::area(std::vector<Polygon>& data, std::string& arg)
@@ -89,8 +89,8 @@ int T3_hism::perms(std::vector<Polygon>& data, Polygon& polygon)
 
 std::string T3_hism::inframe(std::vector<Polygon>& data, Polygon& polygon)
 {
-  if (getLeftX(polygon) >= getLeftX_data(data) && getLeftY(polygon) >= getLeftY_data(data) 
-    && getRightX(polygon) <= getRightX_data(data) && getRightY(polygon) <= getRightY_data(data)) 
+  if (getLeftX(polygon) >= getLeftX_data(data) && getLeftY(polygon) >= getLeftY_data(data)
+    && getRightX(polygon) <= getRightX_data(data) && getRightY(polygon) <= getRightY_data(data))
   {
     return "<TRUE>";
   }

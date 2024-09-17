@@ -27,9 +27,7 @@ namespace T3_hism {
     {
       return in;
     }
-    // Example:
-    // 3 (1;1) (1;3) (3;3)
-    Polygon polyInput; // creating another polygon for tests
+    Polygon polyInput;
     int vertex_count = 0;
     in >> vertex_count;
     if (!in || vertex_count < 3) {
@@ -42,7 +40,7 @@ namespace T3_hism {
         in.setstate(std::ios::failbit);
       }
       else if (in.peek() == '\n') {
-        break; // end of string
+        break;
       }
       Point point;
       in >> point;
@@ -53,7 +51,7 @@ namespace T3_hism {
       in.setstate(std::ios::failbit);
     }
     if (in) {
-      dest = polyInput; // if everything is fine with the stream, then assign "dest" to our test polygon
+      dest = polyInput;
     }
     return in;
   }
@@ -74,12 +72,12 @@ namespace T3_hism {
     while (!in.eof()) {
       if (!in) {
         in.clear();
-        in.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // that do not match the format should be ignored
+        in.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
       }
       std::copy(
-        std::istream_iterator<Polygon>(in), // the iterator of the beginning of the stream
-        std::istream_iterator<Polygon>(), // the iterator of the end of the stream
-        std::back_inserter(data) // creates an iterator that adds a value to the end of the container using push_back (back_inserter for vector, deque)
+        std::istream_iterator<Polygon>(in),
+        std::istream_iterator<Polygon>(),
+        std::back_inserter(data)
       );
     }
     return data;
@@ -96,8 +94,8 @@ namespace T3_hism {
 
   double getPolygonArea(const Polygon& dest)
   {
-    const Point fixedpoint = dest.points[0]; // a fixed point, we connect it with other points, forming triangles
-    Point previouspoint = dest.points[1]; // the point that will be updated when iterating over the remaining points.
+    const Point fixedpoint = dest.points[0];
+    Point previouspoint = dest.points[1];
 
     auto lambda = [&fixedpoint, &previouspoint](double summary, const Point& cur)
       {
@@ -105,15 +103,13 @@ namespace T3_hism {
         previouspoint = cur;
         return summary;
       };
-    return std::accumulate(dest.points.begin() + 2, dest.points.end(), 0.0, lambda); // calculation of the total sum of all calculated polygon areas
-    // +2 to start from the third point, because the first two points are defined (fixedpoint, previouspoint)
-    // The lambda function is called for each point in the range in order to reach the end point
+    return std::accumulate(dest.points.begin() + 2, dest.points.end(), 0.0, lambda);
   }
 
   double getSumArea_Param(double summary, const Polygon& dest, int param, int vertex_count)
   {
     double func_summary_result = summary;
-    if ((dest.points.size() % 2 == param || param == -10) && vertex_count == 0) { // EVEN || ODD || MEAN VALUE
+    if ((dest.points.size() % 2 == param || param == -10) && vertex_count == 0) {
       func_summary_result += getPolygonArea(dest);
     }
     else if (param == -20 && dest.points.size() == vertex_count) {
@@ -161,5 +157,4 @@ namespace T3_hism {
   {
     return getRightX(*std::max_element(data.begin(), data.end(), [](Polygon& poly1, Polygon& poly2) { return getRightY(poly1) < getRightY(poly2); }));
   }
-
   }
