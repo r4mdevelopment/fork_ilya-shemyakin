@@ -120,41 +120,65 @@ namespace T3_hism {
 
   int getLeftX(Polygon& dest)
   {
-    return std::min_element(dest.points.begin(), dest.points.end(), [](const Point& a, const Point& b) { return a.x < b.x; })->x;
+    return std::min_element(dest.points.begin(), dest.points.end(), [](const Point& a, const Point& b)
+      {
+      return a.x < b.x;
+      })->x;
   }
 
   int getLeftY(Polygon& dest)
   {
-    return std::min_element(dest.points.begin(), dest.points.end(), [](const Point& a, const Point& b) { return a.y < b.y; })->y;
+    return std::min_element(dest.points.begin(), dest.points.end(), [](const Point& a, const Point& b)
+      {
+      return a.y < b.y;
+      })->y;
   }
 
   int getRightX(Polygon& dest)
   {
-    return std::max_element(dest.points.begin(), dest.points.end(), [](const Point& a, const Point& b) { return a.x < b.x; })->x;
+    return std::max_element(dest.points.begin(), dest.points.end(), [](const Point& a, const Point& b)
+      {
+      return a.x < b.x;
+      })->x;
   }
 
   int getRightY(Polygon& dest)
   {
-    return std::max_element(dest.points.begin(), dest.points.end(), [](const Point& a, const Point& b) { return a.y < b.y; })->y;
+    return std::max_element(dest.points.begin(), dest.points.end(), [](const Point& a, const Point& b)
+      {
+      return a.y < b.y;
+      })->y;
   }
 
   int getLeftX_data(std::vector<Polygon>& data)
   {
-    return getLeftX(*std::min_element(data.begin(), data.end(), [](Polygon& poly1, Polygon& poly2) { return getLeftX(poly1) < getLeftX(poly2); }));
+    return getLeftX(*std::min_element(data.begin(), data.end(), [](Polygon& poly1, Polygon& poly2)
+      {
+      return getLeftX(poly1) < getLeftX(poly2);
+      }));
   }
 
   int getLeftY_data(std::vector<Polygon>& data)
   {
-    return getLeftY(*std::min_element(data.begin(), data.end(), [](Polygon& poly1, Polygon& poly2) { return getLeftY(poly1) < getLeftY(poly2); }));
+    return getLeftY(*std::min_element(data.begin(), data.end(), [](Polygon& poly1, Polygon& poly2)
+      {
+      return getLeftY(poly1) < getLeftY(poly2);
+      }));
   }
 
   int getRightX_data(std::vector<Polygon>& data)
   {
-    return getRightX(*std::max_element(data.begin(), data.end(), [](Polygon& poly1, Polygon& poly2) { return getRightX(poly1) < getRightX(poly2); }));
+    return getRightX(*std::max_element(data.begin(), data.end(), [](Polygon& poly1, Polygon& poly2)
+      {
+      return getRightX(poly1) < getRightX(poly2);
+      }));
   }
 
   int getRightY_data(std::vector<Polygon>& data)
   {
-    return getRightX(*std::max_element(data.begin(), data.end(), [](Polygon& poly1, Polygon& poly2) { return getRightY(poly1) < getRightY(poly2); }));
+    return getRightX(*std::max_element(data.begin(), data.end(), [](Polygon& poly1, Polygon& poly2)
+      {
+      return getRightY(poly1) < getRightY(poly2);
+      }));
   }
   }
