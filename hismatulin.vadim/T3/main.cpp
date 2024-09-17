@@ -1,5 +1,7 @@
 #include <iomanip>
 #include <fstream>
+#include <numeric>
+#include <algorithm>
 #include "commands.h"
 
 using namespace T3_hism;

@@ -111,10 +111,11 @@ namespace T3_hism {
   double getSumArea_Param(double summary, const Polygon& dest, int param, int vertex_count)
   {
     double func_summary_result = summary;
-    if ((dest.points.size() % 2 == param || param == -10) && vertex_count == 0) {
+    if ((static_cast<int>(dest.points.size()) % 2 == param || param == -10) && vertex_count == 0)
+    {
       func_summary_result += getPolygonArea(dest);
     }
-    else if (param == -20 && dest.points.size() == vertex_count) {
+    else if (param == -20 && static_cast<int>(dest.points.size()) == vertex_count) {
       func_summary_result += getPolygonArea(dest);
     }
     return func_summary_result;
