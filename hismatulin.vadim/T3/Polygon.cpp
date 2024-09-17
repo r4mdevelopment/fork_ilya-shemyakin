@@ -66,6 +66,7 @@ namespace T3_hism {
       return in;
     }
     in >> DelimiterIO{ '(' } >> dest.x >> DelimiterIO{ ';' } >> dest.y >> DelimiterIO{ ')' };
+    return in;
   }
 
   std::vector<Polygon> readStream(std::istream& in)

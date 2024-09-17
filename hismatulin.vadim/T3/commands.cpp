@@ -98,7 +98,7 @@ int T3_hism::count(std::vector<Polygon>& data, std::string& arg)
   {
     return std::count_if(data.begin(), data.end(), std::bind([](const Polygon& a, int vertex_count)
       {
-      return a.points.size() == vertex_count;
+      return static_cast<int>(a.points.size()) == vertex_count;
       }, _1, N));
   }
   else
