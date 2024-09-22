@@ -24,7 +24,7 @@ namespace yakovlev
 
   double area(std::vector<Polygon>& figures, const std::string& arg){
     int num = isArgANumber(arg);
-      
+
     if (num == -1){
       if (arg == "EVEN") {
         return std::accumulate(figures.begin(), figures.end(), 0.0, std::bind(accumulateArea, _1, _2, 2, 0));
@@ -122,7 +122,7 @@ namespace yakovlev
         isEqualSides(p.points[1], p.points[2], p.points[3], p.points[0]);
       });
   }
-   
+
   int same(const std::vector<Polygon>& polygons, const Polygon& target) {
     return std::count_if(polygons.begin(), polygons.end(),
       [&target](const Polygon& poly)
