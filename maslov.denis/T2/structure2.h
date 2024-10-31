@@ -1,5 +1,5 @@
-#ifndef NAMESPACE_H
-#define NAMESPACE_H
+#ifndef STRUCTURE2_H
+#define STRUCTURE2_H
 #include "libraries.h"
 namespace DNLX
 {
