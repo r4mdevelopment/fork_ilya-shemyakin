@@ -5,6 +5,12 @@
 #include <map>
 #include <set>
 #include <string>
+#include <algorithm>
+#include <fstream>
+#include <sstream>
+#include <cctype>
+#include <limits>
+#include <stdexcept>
 
 class Tree {
   std::map<std::string, std::set<int>> tree_;

@@ -1,5 +1,4 @@
 #include "Tree.h"
-#include <algorithm>
 
 bool Tree::add(const std::string& word, int lineNumber) {
   std::string key = word;
